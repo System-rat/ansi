@@ -54,7 +54,7 @@ to I wil publish the docs, until then the documentation can be
 manually built.
 
 ```sh
-$ cd ansi/docs_sphinx/ && make html && firefox _build/html/index.html
+$ cd ansi/docs/ && make html && firefox _build/html/index.html
 ```
 
 # Current features
