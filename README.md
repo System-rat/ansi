@@ -65,6 +65,10 @@ Currently the library implements the basic ANSI features:
  - [Erasing and moving](#erasing-lines-and-moving-the-cursor)
  - [Other](#other-stuff)
 
+**NOTE:** All of the features will automatically disable themselves
+if the process is not attached to a terminal (Unless the library
+is compiled with -DFORCE_TERM) or if the OS is Windows (for now)
+
 ## Turning text bold, italic, etc.
 ```cpp
 #include <Ansi>
