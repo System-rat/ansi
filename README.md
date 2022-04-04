@@ -53,6 +53,17 @@ As soon as I figure out how to make Sphinx work like I want it
 to I wil publish the docs, until then the documentation can be
 manually built.
 
+Building the documentation requires a few dependencies:
+ - doxygen
+ - sphinx-doc
+
+And some pip packages:
+ - sphinx-rtd-theme
+ - sphinx-sitemap
+ - breathe
+
+ After those are installed run the following:
+
 ```sh
 $ cd docs/ && make html && firefox _build/html/index.html
 ```
