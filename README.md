@@ -176,7 +176,7 @@ manipulating text via function manipulators.
 the manipulator so the function returns a wrapper around an
 `std::function` so it can have an overloaded `operator<<`. This
 is so we don't get undesired overloading of just _any_ 
-`std::function` that satisfies the type;
+`std::function` that satisfies the type.
 
 An example:
 ```cpp
