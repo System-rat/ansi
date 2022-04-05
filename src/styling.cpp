@@ -23,6 +23,7 @@
 
 #include "styling.h"
 #include "ansi.h"
+#include "utils.h"
 #include <cstring>
 #include <ostream>
 #include <tuple>
@@ -31,36 +32,14 @@ namespace ansi {
 namespace styling {
 
 Style::Style(StyleColor c, std::initializer_list<ansi::TextModifier> m)
-    : color(c), modifiers(m){};
+    : color(c), modifiers(m) {
+    compute_format_text();
+};
 
 const ansi::ManipulatorFunc Style::apply(const char *text) const {
+    const std::string ftext = format_text.str();
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
-        ManipulatorFunc mc = ansi::manip::color(ansi::Default);
-
-        switch (color.type) {
-        case StyleColor::ANSI:
-            mc = ansi::manip::color(color.value.ansiColor);
-            break;
-        case StyleColor::Term256:
-            mc = ansi::manip::color(color.value.term);
-            break;
-        case StyleColor::RGB:
-            mc = ansi::manip::color(std::get<0>(color.value.rgb),
-                                    std::get<1>(color.value.rgb),
-                                    std::get<2>(color.value.rgb));
-            break;
-
-        default:
-            break;
-        }
-
-        mc(os);
-
-        for (auto &&m : modifiers) {
-            auto mm = ansi::manip::modifier(m);
-
-            mm(os);
-        }
+        write_if_term(os, ftext.c_str(), ftext.length());
 
         os.write(text, strlen(text));
 
@@ -68,6 +47,37 @@ const ansi::ManipulatorFunc Style::apply(const char *text) const {
 
         return os;
     });
+}
+
+void Style::compute_format_text() {
+    format_text.clear();
+    format_text.str(std::string());
+    ManipulatorFunc mc = ansi::manip::color(ansi::Default);
+
+    switch (color.type) {
+    case StyleColor::ANSI:
+        mc = ansi::manip::color(color.value.ansiColor);
+        break;
+    case StyleColor::Term256:
+        mc = ansi::manip::color(color.value.term);
+        break;
+    case StyleColor::RGB:
+        mc = ansi::manip::color(std::get<0>(color.value.rgb),
+                                std::get<1>(color.value.rgb),
+                                std::get<2>(color.value.rgb));
+        break;
+
+    default:
+        break;
+    }
+
+    mc(format_text);
+
+    for (auto &&m : modifiers) {
+        auto mm = ansi::manip::modifier(m);
+
+        mm(format_text);
+    }
 }
 
 } // namespace styling

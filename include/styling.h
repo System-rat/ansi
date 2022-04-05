@@ -25,6 +25,7 @@
 #include "ansi.h"
 #include "manipulators.h"
 #include <ostream>
+#include <sstream>
 #include <tuple>
 #include <vector>
 
@@ -53,17 +54,6 @@ namespace styling {
 class Style {
   public:
     /**
-     * @brief Holds the text color and type of color (ANSI, Term256, RGB)
-     */
-    StyleColor color;
-
-    /**
-     * @brief Holds the various text modifiers that can be applied (Bold,
-     * Underline, etc.)
-     */
-    std::vector<ansi::TextModifier> modifiers;
-
-    /**
      * @brief Constructs a new Style using a color and a list of
      * modifiers
      *
@@ -80,6 +70,22 @@ class Style {
      * @note Resets all styling after the text is written to the ostream
      */
     const ManipulatorFunc apply(const char *text) const;
+
+  private:
+    /**
+     * @brief Holds the text color and type of color (ANSI, Term256, RGB)
+     */
+    StyleColor color;
+
+    /**
+     * @brief Holds the various text modifiers that can be applied (Bold,
+     * Underline, etc.)
+     */
+    std::vector<ansi::TextModifier> modifiers;
+
+    std::stringstream format_text;
+
+    void compute_format_text();
 };
 
 } // namespace styling
