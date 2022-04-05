@@ -144,13 +144,13 @@ void Lexer::lex_text() {
                 // BEHOLD THE CURSED ONE
                 // THE DREADED UNDEFINED ONE
                 // THE WORLD ENDER
-                goto END;
+                goto HERESY;
             }
         }
         offset++;
     }
 
-END:
+HERESY:
     tokens.push_back(
         Token{.type = LexToken::Text, .value = std::string(cursor, offset)});
     cursor += offset;
