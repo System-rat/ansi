@@ -8,7 +8,16 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-add_executable(tests ansi_tests.cpp ../manipulators.cpp)
+add_executable(
+    tests
+    ansi_tests.cpp
+    internal_tests_parsing.cpp
+    ../manipulators.cpp
+    ../ansi.cpp
+    ../format.cpp
+    ../styling.cpp
+    ../internals/format_parser.cpp
+)
 
 target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/include)
 

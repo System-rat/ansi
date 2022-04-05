@@ -22,7 +22,7 @@
 
 #include "manipulators.h"
 #include "ansi.h"
-#include "utils.h"
+#include "internals/utils.h"
 #include <iostream>
 
 // TODO: Make this a header library?
