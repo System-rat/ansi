@@ -159,3 +159,5 @@ std::ostream &move_cursor_home(std::ostream &os) { return os.write("\e[H", 3); }
 std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc mf) {
     return mf(os);
 }
+
+#undef __ANSI_IMPL

@@ -26,7 +26,9 @@
 #include <iostream>
 #include <string>
 
+#ifndef NODOC
 #define __ANSI_MANIPULATOR(name) std::ostream &name(std::ostream &);
+#endif
 
 namespace ansi {
 
@@ -187,3 +189,6 @@ std::ostream &move_cursor_home(std::ostream &os);
  * @return The manipulated stream
  */
 std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc mf);
+
+// Clean up utilities
+#undef __ANSI_MANIPULATOR
