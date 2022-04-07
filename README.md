@@ -243,4 +243,4 @@ int main() {
 
 # Contributing
 Send a PR and I _might_ look into it, this is just a small
-learning project. Keep the license `MIT` and all that jazz.
+learning project. Be civil and all that jazz.
