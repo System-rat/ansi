@@ -24,13 +24,17 @@
 #ifndef _WIN32
 // Once again, suck it windows
 #include "termios.h"
+#include "unistd.h"
 
 namespace ansi {
 
 // Yeah, yeah, globals, who gives a fuck
-termios original[2];
+termios original[3];
 
 void set_raw_tty(int fd) {
+    if (!isatty(fd))
+        return;
+
     termios t;
     tcgetattr(fd, &t);
 
@@ -47,7 +51,12 @@ void set_raw_tty(int fd) {
     tcsetattr(fd, TCSAFLUSH, &t);
 }
 
-void reset_tty(int fd) { tcsetattr(fd, TCSAFLUSH, &original[fd]); }
+void reset_tty(int fd) {
+    if (!isatty(fd))
+        return;
+
+    tcsetattr(fd, TCSAFLUSH, &original[fd]);
+}
 } // namespace ansi
 
 #endif
