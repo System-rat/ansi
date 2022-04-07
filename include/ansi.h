@@ -49,7 +49,7 @@ class ManipulatorFunc {
      * @param function The manipulator lambda with the signiture of
      * std::ostream&(std::ostream&)
      */
-    explicit ManipulatorFunc(fn function) { func = function; }
+    explicit ManipulatorFunc(fn &&function) { func = function; }
 
     /**
      * @brief Apply the internal lambda to the std::ostream
