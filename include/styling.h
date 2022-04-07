@@ -60,7 +60,7 @@ class Style {
      * @param c The color of the text
      * @param m A list of modifiers to apply to text
      */
-    Style(StyleColor c, std::initializer_list<ansi::TextModifier> m);
+    Style(StyleColor c, std::initializer_list<ansi::TextModifier> &&m);
 
     /**
      * @brief Applies the style to text

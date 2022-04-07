@@ -188,7 +188,7 @@ std::ostream &move_cursor_home(std::ostream &os);
  * @param mf The manipulator
  * @return The manipulated stream
  */
-std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc mf);
+std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc &&mf);
 
 // Clean up utilities
 #undef __ANSI_MANIPULATOR

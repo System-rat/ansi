@@ -31,7 +31,7 @@
 namespace ansi {
 namespace styling {
 
-Style::Style(StyleColor c, std::initializer_list<ansi::TextModifier> m)
+Style::Style(StyleColor c, std::initializer_list<ansi::TextModifier> &&m)
     : color(c), modifiers(m) {
     compute_format_text();
 };

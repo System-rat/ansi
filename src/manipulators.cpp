@@ -156,7 +156,7 @@ std::ostream &move_cursor_home(std::ostream &os) { return os.write("\e[H", 3); }
 } // namespace manip
 } // namespace ansi
 
-std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc mf) {
+std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc &&mf) {
     return mf(os);
 }
 
