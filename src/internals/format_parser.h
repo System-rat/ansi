@@ -26,96 +26,46 @@
 #pragma once
 #include "ansi.h"
 #include <sstream>
+#include <string>
 #include <vector>
 
-enum struct LexToken { Start, End, Comma, Ident, Var, Text, Number };
+enum struct LexToken { Start, End, Comma, Ident, Var, Text, Number, EOFToken };
 
 struct Token {
     LexToken type;
 
-    std::string value;
+    const char *start;
+    int length;
+
+    std::string to_string() const { return std::string(start, length); }
 };
-
-namespace ast {
-namespace tokens {
-
-enum struct TopLevel { Modifier, Text, Variable };
-
-enum struct Modifier { Color, Style };
-
-} // namespace tokens
-
-struct Modifier {
-    tokens::Modifier type;
-    union {
-        ansi::StyleColor color;
-        ansi::TextModifier modifier;
-    } value;
-};
-
-struct TopLevel {
-    tokens::TopLevel type;
-    union {
-        Modifier modifier;
-        std::string text;
-        // Variable is just a type level identifier
-    } value;
-};
-
-struct AST {
-    std::vector<TopLevel> topLevel;
-};
-
-} // namespace ast
 
 class Lexer {
   public:
     Lexer(const char *inputText);
 
-    std::vector<Token> generate_tokens();
+    Token get_token();
 
   private:
+    bool is_in_context = false;
+
     const char *input;
 
     const char *cursor;
 
     int offset;
 
-    std::vector<Token> tokens;
-
     bool is_at_end(int extraOffset = 0);
 
-    void lex_text();
+    Token lex_text();
 
-    void lex_format();
+    Token lex_format();
 
-    void lex_ident();
+    Token lex_ident();
 
-    void lex_number();
+    Token lex_number();
 
     void advance();
 
     bool is_escape();
-};
-
-class Parser {
-  public:
-    Parser(const std::vector<LexToken> inputTokens);
-
-    ast::AST generate_ast();
-
-  private:
-    const std::vector<LexToken> tokens;
-
-    ast::AST ast;
-
-    LexToken *cursor;
-
-    int offset;
-
-    std::stringstream fstr;
-
-    bool is_at_end(int extraOffset = 0);
-
-    void advance();
 };

@@ -26,20 +26,45 @@
 #include <vector>
 
 TEST(Internals, Lexing) {
-    std::vector<Token> expectedOutput = {
-        Token{.type = LexToken::Start},
-        Token{.type = LexToken::Ident, .value = "Bold"},
-        Token{.type = LexToken::Comma},
-        Token{.type = LexToken::Number, .value = "123"},
-        Token{.type = LexToken::End},
-        Token{.type = LexToken::Text, .value = "Text "},
-        Token{.type = LexToken::Var}};
+    const char *txt = "#[Bold, 123]Text #$";
 
-    std::vector<Token> generated =
-        Lexer("#[Bold, 123]Text #$").generate_tokens();
+    std::vector<Token> expectedOutput = {
+        Token{.type = LexToken::Start, .start = "#[", .length = 2},
+        Token{.type = LexToken::Ident, .start = "Bold", .length = 4},
+        Token{.type = LexToken::Comma, .start = ",", .length = 1},
+        Token{.type = LexToken::Number, .start = "123", .length = 3},
+        Token{.type = LexToken::End, .start = "]", .length = 1},
+        Token{.type = LexToken::Text, .start = "Text ", .length = 5},
+        Token{.type = LexToken::Var, .start = "#$", .length = 2}};
+
+    Lexer l = Lexer(txt);
+
+    Token t;
+
+    std::vector<Token> generated;
+
+    while ((t = l.get_token()).type != LexToken::EOFToken) {
+        generated.push_back(t);
+    }
 
     for (int i = 0; i < generated.size(); i++) {
-        ASSERT_EQ(generated[i].value, expectedOutput[i].value);
+        ASSERT_EQ(generated[i].to_string(), expectedOutput[i].to_string());
         ASSERT_EQ(generated[i].type, expectedOutput[i].type);
     }
+}
+
+TEST(Internals, LexerError) {
+    Lexer l("#[##]");
+    l.get_token();
+    ASSERT_ANY_THROW(l.get_token());
+
+    Lexer valid("#[Bold, Green]Text and stuff #[1234, DoesNotExist]More stuff "
+                "#[]Reset");
+
+    ASSERT_NO_THROW({
+        for (;;) {
+            if (valid.get_token().type == LexToken::EOFToken)
+                break;
+        }
+    });
 }

@@ -27,32 +27,41 @@
 
 // LEXER
 
-std::vector<Token> Lexer::generate_tokens() {
-    while (!is_at_end()) {
+Token Lexer::get_token() {
+    if (is_at_end())
+        return Token{.type = LexToken::EOFToken, .start = cursor};
+    if (!is_in_context) {
         switch (*cursor) {
         case '#': {
             if (*(cursor + 1) == '\0')
                 throw std::runtime_error("Unexpected end of input");
 
             if (*(cursor + 1) == '$') {
-                tokens.push_back(Token{.type = LexToken::Var});
-
+                auto tok =
+                    Token{.type = LexToken::Var, .start = cursor, .length = 2};
                 cursor += 2;
+
+                return tok;
             } else if (*(cursor + 1) == '[') {
-                lex_format();
+                is_in_context = true;
+                return lex_format();
             } else {
-                lex_text();
+                return lex_text();
             }
             break;
         }
 
         default:
-            lex_text();
+            return lex_text();
             break;
         }
-    }
+    } else {
+        while (isspace(*cursor)) {
+            cursor++;
+        }
 
-    return tokens;
+        return lex_format();
+    }
 }
 
 Lexer::Lexer(const char *str) : input(str), cursor(str){};
@@ -64,70 +73,93 @@ bool Lexer::is_at_end(int extraOffset) {
     return false;
 }
 
-void Lexer::lex_number() {
+Token Lexer::lex_number() {
     offset = 0;
     while (isdigit(*(cursor + offset))) {
         offset++;
     }
 
-    tokens.push_back(
-        Token{.type = LexToken::Number, .value = std::string(cursor, offset)});
+    auto token =
+        Token{.type = LexToken::Number, .start = cursor, .length = offset};
     cursor += offset;
     offset = 0;
+
+    return token;
 }
 
-void Lexer::lex_ident() {
+Token Lexer::lex_ident() {
     offset = 0;
     while (isalpha(*(cursor + offset))) {
         offset++;
     }
 
-    tokens.push_back(
-        Token{.type = LexToken::Ident, .value = std::string(cursor, offset)});
+    auto token =
+        Token{.type = LexToken::Ident, .start = cursor, .length = offset};
     cursor += offset;
     offset = 0;
+
+    return token;
 }
 
-void Lexer::lex_format() {
+Token Lexer::lex_format() {
     offset = 0;
-    tokens.push_back(Token{.type = LexToken::Start});
-    cursor += 2;
-    while (*cursor != ']') {
-        char c = *cursor;
 
-        if (isspace(c)) {
-            cursor++;
-            continue;
-        }
-
-        if (isdigit(c)) {
-            lex_number();
-            continue;
-        }
-
-        if (isalpha(c)) {
-            lex_ident();
-            continue;
-        }
-
-        if (c == ',') {
-            tokens.push_back(Token{.type = LexToken::Comma});
-            cursor++;
-            continue;
-        }
-
-        if (c == '\0') {
-            throw std::runtime_error("Unexpected end of input");
-        }
-
-        throw std::runtime_error("The hell is this character?");
+    if (is_at_end()) {
+        throw std::runtime_error("unexpected end of input");
     }
 
-    tokens.push_back(Token{.type = LexToken::End});
-    cursor++;
+    switch (*(cursor + offset)) {
+    case '#': {
+        if (*(cursor + offset + 1) == '[') {
+            auto token =
+                Token{.type = LexToken::Start, .start = cursor, .length = 2};
+            cursor += 2;
+
+            return token;
+        } else {
+            throw std::runtime_error(std::string("unexpected symbol: ") +
+                                     std::string(cursor));
+        }
+        break;
+    }
+    case ',': {
+        auto token =
+            Token{.type = LexToken::Comma, .start = cursor, .length = 1};
+        cursor++;
+
+        return token;
+        break;
+    }
+    case ']': {
+        auto token = Token{.type = LexToken::End, .start = cursor, .length = 1};
+        cursor++;
+        is_in_context = false;
+
+        return token;
+        break;
+    }
+
+    default: {
+        if (isalpha(*cursor)) {
+            return lex_ident();
+        } else if (isdigit(*cursor)) {
+            return lex_number();
+        } else if (isspace(*cursor)) {
+            while (isspace(*cursor)) {
+                cursor++;
+            }
+
+            return lex_format();
+        } else {
+            throw std::runtime_error(std::string("unexpected symbol: ") +
+                                     std::string(cursor));
+        }
+        break;
+    }
+    }
 }
 
-void Lexer::lex_text() {
+Token Lexer::lex_text() {
     offset = 0;
     while (!is_at_end(offset)) {
         if (*(cursor + offset) == '#') {
@@ -151,10 +183,12 @@ void Lexer::lex_text() {
     }
 
 HERESY:
-    tokens.push_back(
-        Token{.type = LexToken::Text, .value = std::string(cursor, offset)});
+    auto token =
+        Token{.type = LexToken::Text, .start = cursor, .length = offset};
     cursor += offset;
     offset = 0;
+
+    return token;
 }
 
 bool Lexer::is_escape() {
