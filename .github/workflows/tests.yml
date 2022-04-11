@@ -22,9 +22,9 @@ jobs:
       uses: actions/checkout@v3.0.0
 
     - name: Build tests
-      run: cmake -B build -S . -G Ninja
+      run: cmake --config Release -B build -S . -G Ninja
         && cd build
         && ninja tests
       
     - name: Run CTest
-      run: cd build && ctest
+      run: cd build && ctest -C Release -T test --output-on-failure

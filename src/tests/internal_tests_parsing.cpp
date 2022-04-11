@@ -48,7 +48,7 @@ TEST(Internals, Lexing) {
         generated.push_back(t);
     }
 
-    for (int i = 0; i < generated.size(); i++) {
+    for (std::vector<Token>::size_type i = 0; i < generated.size(); i++) {
         ASSERT_EQ(generated[i].to_string(), expectedOutput[i].to_string());
         ASSERT_EQ(generated[i].type, expectedOutput[i].type);
     }

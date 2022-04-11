@@ -301,7 +301,7 @@ std::string Parser::get_format_string() {
 
     std::string built_string = builder.str();
     // Clean the escaped #
-    if (built_string.find("##") != -1)
+    if (built_string.find("##") != std::string::npos)
         return std::regex_replace(built_string, std::regex("##"), "#");
 
     return built_string;
@@ -416,6 +416,8 @@ std::string token_to_string(LexToken token) {
         return ":";
     case LexToken::EOFToken:
         return "EOF";
+    default:
+        return "Unreachable";
     }
 }
 
