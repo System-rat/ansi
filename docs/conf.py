@@ -203,7 +203,7 @@ epub_title = project
 epub_exclude_files = ['search.html']
 
 breathe_projects = {
-        "ANSI": "_build/xml/"
+        "ANSI": "_build/xml/",
 }
 breathe_default_project = "ANSI"
 breathe_default_members = ('members', 'undoc-members')
