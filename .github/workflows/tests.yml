@@ -16,10 +16,7 @@ jobs:
 
     steps:
     - name: Requirements
-      run: sudo apt install clang
-        && sudo apt install cmake
-        && sudo apt install ninja-build
-        && sudo apt install git
+      run: sudo apt install clang cmake ninja-build git
 
     - name: Checkout
       uses: actions/checkout@v3.0.0
@@ -30,4 +27,4 @@ jobs:
         && ninja tests
       
     - name: Run CTest
-      run: ctest
+      run: cd build && ctest
