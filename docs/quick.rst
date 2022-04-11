@@ -22,7 +22,7 @@ The library can also be installed system-wide:
 
 .. code-block:: shell
 
-    $ cmake --config Release -B build -S . -G Ninja -DINSTALL_ANSI=ON -DBUILD_TESTING=OFF
+    $ cmake -DCMAKE_BUILD_TYPE=Release -B build -S . -G Ninja -DINSTALL_ANSI=ON -DBUILD_TESTING=OFF
     $ cd build
     $ sudo ninja install
 
