@@ -49,9 +49,9 @@ $ ctest
 ```
 
 # Documentation
-As soon as I figure out how to make Sphinx work like I want it
-to I wil publish the docs, until then the documentation can be
-manually built.
+The documentation is available on [GitHub Pages](https://system-rat.github.io/ansi/)
+
+The docs can also be built locally using the following steps:
 
 Building the documentation requires a few dependencies:
  - doxygen
