@@ -29,7 +29,17 @@
 #include <string>
 #include <vector>
 
-enum struct LexToken { Start, End, Comma, Ident, Var, Text, Number, EOFToken };
+enum struct LexToken {
+    Start,
+    End,
+    Comma,
+    Ident,
+    Var,
+    Text,
+    Number,
+    Colon,
+    EOFToken
+};
 
 struct Token {
     LexToken type;
@@ -42,7 +52,7 @@ struct Token {
 
 class Lexer {
   public:
-    Lexer(const char *inputText);
+    explicit Lexer(const char *inputText);
 
     Token get_token();
 
@@ -68,4 +78,28 @@ class Lexer {
     void advance();
 
     bool is_escape();
+};
+
+class Parser {
+  public:
+    explicit Parser(const char *text);
+
+    std::string get_format_string();
+
+  private:
+    std::vector<Token> tokens;
+
+    Token *cursor;
+
+    std::stringstream builder;
+
+    bool has_modifiers;
+
+    void advance();
+
+    Token *peek();
+
+    void consume(LexToken type);
+
+    void format();
 };

@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 #include "../internals/format_parser.h"
+#include "manipulators.h"
 #include <gtest/gtest.h>
 #include <string>
 #include <vector>
@@ -67,4 +68,18 @@ TEST(Internals, LexerError) {
                 break;
         }
     });
+}
+
+TEST(Internals, Parsing) {
+    Parser p("#[Bold, Underline, Red, 1:1:255, 220]Text #$");
+
+    std::string text = p.get_format_string();
+
+    std::stringstream test_text;
+    test_text << ansi::manip::reset << ansi::manip::modifier(ansi::Bold)
+              << ansi::manip::underline << ansi::manip::color(ansi::Red)
+              << ansi::manip::color(1, 1, 255) << ansi::manip::color(220)
+              << "Text %s" << ansi::manip::reset;
+
+    ASSERT_EQ(text, test_text.str());
 }

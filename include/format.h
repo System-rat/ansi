@@ -21,10 +21,49 @@
 // SOFTWARE.
 
 #pragma once
-#include <string>
+
+/**
+ * @brief Convenience macro for `ansi::format_str`
+ */
+#define ANSI(str) ansi::format_str(str)
 
 namespace ansi {
 
-std::string format_str(const char *fstr);
+/**
+ * @brief Returns a cached ANSI format string
+ * @details Parses the input string using a tiny format language and returns a
+ * cached `printf` compatible string.
+ *
+ * The formatting is as follows:
+ *  - All normal text is treated as text
+ *  - `#[` begins a format modifier
+ *  - Inside the format modifier color and text modifiers can be specified
+ * (Bold, Red, 220, 20:10:2)
+ *  - Color can be specified as either an ANSI color, a Term256 color or rgb
+ *  - RGB is 3 numbers separated by colons, ie. 220:150:30
+ *  - `]` closes the format modifier
+ *  - `#$' gets replaced with a `%s`
+ *  - `##` escapes the `#` character
+ *
+ * An example:
+ * @code
+ * #include <iostream>
+ * #include <Ansi>
+ *
+ * int main() {
+ *     std::cout << ansi::format_str(
+ *         "#[Bold, Underline, Red]Underlined and ##bolded## text"
+ *     ) << std::endl;
+ * }
+ *
+ * @endcode
+ *
+ * @param fstr ANSI format string
+ * @return A cached printf compatible format string
+ *
+ * @throws std::runtime_exception The format string is invalid and cannot be
+ * parsed
+ */
+const char *format_str(const char *fstr);
 
 } // namespace ansi
