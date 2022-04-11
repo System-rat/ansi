@@ -20,7 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
-#include "manipulators.h"
-#include "styling.h"
 #include "format.h"
+#include "internals/format_parser.h"
+#include <unordered_map>
+
+const char *ansi::format_str(const char *fstr) {
+    // Thread local so we don't get some funky access violations
+    thread_local static std::unordered_map<std::string, std::string> cache;
+
+    std::string key(fstr);
+
+    if (cache.find(key) != cache.end()) {
+        return cache[key].c_str();
+    }
+
+    cache[key] = Parser(fstr).get_format_string();
+
+    return cache[key].c_str();
+}

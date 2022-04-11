@@ -10,6 +10,8 @@ target_sources(ansi
         src/manipulators.cpp
         src/styling.cpp
         src/ansi.cpp
+        src/format.cpp
+        src/internals/format_parser.cpp
 )
 set_target_properties(ansi PROPERTIES POSITION_INDEPENDENT_CODE ON)
 

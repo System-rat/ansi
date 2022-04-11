@@ -1,4 +1,3 @@
-
 // MIT License
 
 // Copyright (c) 2022 System.rat
@@ -23,7 +22,7 @@
 
 #include "styling.h"
 #include "ansi.h"
-#include "utils.h"
+#include "internals/utils.h"
 #include <cstring>
 #include <ostream>
 #include <tuple>
