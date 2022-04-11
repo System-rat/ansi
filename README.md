@@ -136,6 +136,25 @@ int main() {
 }
 ```
 
+## Format strings
+The library contains a small format language for generating and caching
+a `printf` compatible string from a format string. The grammar is pretty simple:
+
+```cpp
+#include <Ansi>
+#include <cstdio>
+
+int main() {
+    // Within a `#[]` block the text color can be defined along with modifiers like Bold, Underline, etc.
+    // `#$` denotes a variable (which will just be replaced with a `%s`)
+    // Color can be an ANSI color, an 8 bit integer for Term256 colors, or 3 8 bit integers for RGB
+    // separated by a colon, ie. 1:2:3
+    // An empty `#[]` style block resets the text styling
+    // An `ansi::manip::reset` is automatically inserted at the end of the text
+    printf(ANSI("#[Bold, Underline, Red]##TEXT## #$"), "variable text");
+}
+```
+
 ## Other stuff
 This library also contains two helper functions for enabling
 RAW terminal output (UNIX only for now)
