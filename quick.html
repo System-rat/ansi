@@ -86,7 +86,7 @@ sub-project:</p>
 </pre></div>
 </div>
 <p>The library can also be installed system-wide:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cmake --config Release -B build -S . -G Ninja -DINSTALL_ANSI<span class="o">=</span>ON -DBUILD_TESTING<span class="o">=</span>OFF
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -B build -S . -G Ninja -DINSTALL_ANSI<span class="o">=</span>ON -DBUILD_TESTING<span class="o">=</span>OFF
 $ <span class="nb">cd</span> build
 $ sudo ninja install
 </pre></div>
