@@ -1,5 +1,10 @@
 # ANSI Compatible text styling
 
+![License badge](https://img.shields.io/github/license/System-rat/ansi.svg?style=for-the-badge)
+![Issues badge](https://img.shields.io/github/issues/System-rat/ansi.svg?style=for-the-badge)
+![Pull requests badge](https://img.shields.io/github/issues-pr/System-rat/ansi.svg?style=for-the-badge)
+![Docs build badge](https://img.shields.io/github/workflow/status/System-rat/ansi/Docs/master?label=docs&style=for-the-badge)
+
 A small C++ library for adding ANSI modifiers to text
 
  - [Requirements](#requirements)
