@@ -19,8 +19,9 @@ jobs:
         && pip3 install breathe
         && pip3 install sphinx-sitemap
 
-    - name: Checkout repo
-      uses: actions/checkout@3.0.0
+    - name: Checkout
+      uses: actions/checkout@v3.0.0
+
 
     - name: Build docs
       run: cd docs
