@@ -74,6 +74,7 @@ Currently the library implements the basic ANSI features:
  - [Bold, Italic, etc](#turning-text-bold-italic-etc)
  - [Color](#coloring-text)
  - [Erasing and moving](#erasing-lines-and-moving-the-cursor)
+ - [Format strings](#format-strings)
  - [Other](#other-stuff)
 
 **NOTE:** All of the features will automatically disable themselves
