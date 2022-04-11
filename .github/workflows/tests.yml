@@ -22,7 +22,7 @@ jobs:
       uses: actions/checkout@v3.0.0
 
     - name: Build tests
-      run: cmake --config Release -B build -S . -G Ninja
+      run: cmake -DCMAKE_BUILD_TYPE=Release -B build -S . -G Ninja
         && cd build
         && ninja tests
       

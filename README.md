@@ -36,7 +36,7 @@ This library can also be installed globaly:
 
 Configure and run using `ninja` or another generator of your choice:
 ```sh
-$ cmake --config Release -B build -S . -G Ninja -DINSTALL_ANSI=ON -DBUILD_TESTING=OFF
+$ cmake -DCMAKE_BUILD_TYPE=Release -B build -S . -G Ninja -DINSTALL_ANSI=ON -DBUILD_TESTING=OFF
 $ cd build
 $ sudo ninja install
 ```
