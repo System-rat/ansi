@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top-level types and functions &mdash; ANSI  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="std::ostream manipulators" href="manipulators.html" />
+    <link rel="prev" title="ANSI API" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> ANSI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">ANSI Library Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ANSI API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Top-level types and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulators.html">std::ostream manipulators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ANSI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">ANSI API</a> &raquo;</li>
+      <li>Top-level types and functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/ansi.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="top-level-types-and-functions">
+<h1>Top-level types and functions<a class="headerlink" href="#top-level-types-and-functions" title="Permalink to this headline"></a></h1>
+<p>An ANSI terminal library. This library contains various utilities for
+outputting colors, styles and moving the cursor in an ANSI compatible terminal.
+The top level <cite>ansi</cite> namespace contains some frequently used types and functions.</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv44ansi">
+<span id="_CPPv34ansi"></span><span id="_CPPv24ansi"></span><span id="ansi"></span><span class="target" id="namespaceansi"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ansi</span></span></span><a class="headerlink" href="#_CPPv44ansi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The root namespace of the ANSI manipulators library. </p>
+<p>Contains various unility structures for ANSI related text outputing </p>
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5ColorE">
+<span id="_CPPv3N4ansi5ColorE"></span><span id="_CPPv2N4ansi5ColorE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5ColorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The ANSI Terminal Simple Color representation. </p>
+<p>Represents the basic ANSI codes for color that are used withing the manipulators </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color5BlackE">
+<span id="_CPPv3N4ansi5Color5BlackE"></span><span id="_CPPv2N4ansi5Color5BlackE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32ab9b545a7eed2c91571d475d7cfab707b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Black</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color5BlackE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color3RedE">
+<span id="_CPPv3N4ansi5Color3RedE"></span><span id="_CPPv2N4ansi5Color3RedE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32a8a8d1dcf0491e43ee0a2051838d215d7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Red</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color3RedE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color5GreenE">
+<span id="_CPPv3N4ansi5Color5GreenE"></span><span id="_CPPv2N4ansi5Color5GreenE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32a0eb3ee54b077c92f487bfbd89557ec6e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Green</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color5GreenE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color6YellowE">
+<span id="_CPPv3N4ansi5Color6YellowE"></span><span id="_CPPv2N4ansi5Color6YellowE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32a54dcc6e42af70c15f10bb9d53f7fe9cc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Yellow</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color6YellowE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color4BlueE">
+<span id="_CPPv3N4ansi5Color4BlueE"></span><span id="_CPPv2N4ansi5Color4BlueE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32afec7e71548ca8d2b3521f8206217a41d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Blue</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color4BlueE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color7MagentaE">
+<span id="_CPPv3N4ansi5Color7MagentaE"></span><span id="_CPPv2N4ansi5Color7MagentaE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32aaceb53f53145f54d92aa58ea41fe71a8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Magenta</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color7MagentaE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color4CyanE">
+<span id="_CPPv3N4ansi5Color4CyanE"></span><span id="_CPPv2N4ansi5Color4CyanE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32ae7c3d4b1032c92c86b51661445c5ea8b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Cyan</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color4CyanE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color5WhiteE">
+<span id="_CPPv3N4ansi5Color5WhiteE"></span><span id="_CPPv2N4ansi5Color5WhiteE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32a8f324590159574f477ece0ab0d2a10e6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">White</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color5WhiteE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5Color7DefaultE">
+<span id="_CPPv3N4ansi5Color7DefaultE"></span><span id="_CPPv2N4ansi5Color7DefaultE"></span><span class="target" id="namespaceansi_1a5fa0d5087466c772a979ca9329053b32aa634f39ff5b0f0e88ef447df8d0d5f4e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Default</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5Color7DefaultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Resets the color back to it’s original terminal color. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifierE">
+<span id="_CPPv3N4ansi12TextModifierE"></span><span id="_CPPv2N4ansi12TextModifierE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1ce"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">TextModifier</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifierE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ANSI text graphics modes. </p>
+<p>Represents the ANSI text graphics modes for changing the styling of text </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier4BoldE">
+<span id="_CPPv3N4ansi12TextModifier4BoldE"></span><span id="_CPPv2N4ansi12TextModifier4BoldE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1ceab6f7581b0339da37604dcef42966a68f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bold</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier4BoldE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier5FaintE">
+<span id="_CPPv3N4ansi12TextModifier5FaintE"></span><span id="_CPPv2N4ansi12TextModifier5FaintE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1cea43fd9b8adde9572b8fc5e62a8e7d8e2b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Faint</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier5FaintE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier6ItalicE">
+<span id="_CPPv3N4ansi12TextModifier6ItalicE"></span><span id="_CPPv2N4ansi12TextModifier6ItalicE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1ceaee4ba0b4d52c4d27b9cb5027a2ef655a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Italic</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier6ItalicE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier9UnderlineE">
+<span id="_CPPv3N4ansi12TextModifier9UnderlineE"></span><span id="_CPPv2N4ansi12TextModifier9UnderlineE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1cea5a7e9b607af694fdabceafb360369bf0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Underline</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier9UnderlineE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier5BlinkE">
+<span id="_CPPv3N4ansi12TextModifier5BlinkE"></span><span id="_CPPv2N4ansi12TextModifier5BlinkE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1ceadbd07fab27d96f026268179cdf3d76d7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Blink</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier5BlinkE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier7ReverseE">
+<span id="_CPPv3N4ansi12TextModifier7ReverseE"></span><span id="_CPPv2N4ansi12TextModifier7ReverseE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1cea68c10b09caf746b537f06d7be9777a06"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Reverse</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier7ReverseE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier6HiddenE">
+<span id="_CPPv3N4ansi12TextModifier6HiddenE"></span><span id="_CPPv2N4ansi12TextModifier6HiddenE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1ceac43923cb5feafb1654f8f18ac4289246"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Hidden</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier6HiddenE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi12TextModifier13StrikethroughE">
+<span id="_CPPv3N4ansi12TextModifier13StrikethroughE"></span><span id="_CPPv2N4ansi12TextModifier13StrikethroughE"></span><span class="target" id="namespaceansi_1a7529cbab2f89d54c9bf23a711456f1ceaed8bd56884d6b3915d503f6836db7803"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Strikethrough</span></span></span><a class="headerlink" href="#_CPPv4N4ansi12TextModifier13StrikethroughE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi15ManipulatorFuncE">
+<span id="_CPPv3N4ansi15ManipulatorFuncE"></span><span id="_CPPv2N4ansi15ManipulatorFuncE"></span><span id="ansi::ManipulatorFunc"></span><span class="target" id="classansi_1_1ManipulatorFunc"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">ManipulatorFunc</span></span></span><a class="headerlink" href="#_CPPv4N4ansi15ManipulatorFuncE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A wrapper for a manipulator lambda. </p>
+<p>A type-safe holder for an std::function manipulator lambda. Supports the call operator for use with the global overload of operator&lt;&lt; With std::ostream </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi15ManipulatorFunc15ManipulatorFuncERR2fn">
+<span id="_CPPv3N4ansi15ManipulatorFunc15ManipulatorFuncERR2fn"></span><span id="_CPPv2N4ansi15ManipulatorFunc15ManipulatorFuncERR2fn"></span><span id="ansi::ManipulatorFunc::ManipulatorFunc__fnRR"></span><span class="target" id="classansi_1_1ManipulatorFunc_1a7ecd3b62036f13beb1656c5ba6660e95"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ManipulatorFunc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">fn</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">function</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi15ManipulatorFunc15ManipulatorFuncERR2fn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classansi_1_1ManipulatorFunc"><span class="std std-ref">ManipulatorFunc</span></a> from a manipulator compatible lambda. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> – The manipulator lambda with the signiture of std::ostream&amp;(std::ostream&amp;) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4ansi15ManipulatorFuncclERNSt7ostreamE">
+<span id="_CPPv3NK4ansi15ManipulatorFuncclERNSt7ostreamE"></span><span id="_CPPv2NK4ansi15ManipulatorFuncclERNSt7ostreamE"></span><span id="ansi::ManipulatorFunc::call-operator__osRC"></span><span class="target" id="classansi_1_1ManipulatorFunc_1a1ee78a3d3aed61e2387487c86dbda736"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">os</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4ansi15ManipulatorFuncclERNSt7ostreamE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Apply the internal lambda to the std::ostream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>os</strong> – The stream to manipulate </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulated stream </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColorE">
+<span id="_CPPv3N4ansi10StyleColorE"></span><span id="_CPPv2N4ansi10StyleColorE"></span><span id="ansi::StyleColor"></span><span class="target" id="structansi_1_1StyleColor"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">StyleColor</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Holds color information compatible with ANSI standards. </p>
+<p>Holds various formats of colors for use with other functions/classes to represent ANSI compatible color formats </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor9ColorTypeE">
+<span id="_CPPv3N4ansi10StyleColor9ColorTypeE"></span><span id="_CPPv2N4ansi10StyleColor9ColorTypeE"></span><span class="target" id="structansi_1_1StyleColor_1a5e1571362eeaaa32429e3a561320cc0f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColorType</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor9ColorTypeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The format type of the color. </p>
+<p>Term256 is for chosing one of the 256 builtin colors, RGB is for chosing the Red, Green, and Blue channels individually (on supported terminals), and ANSI is for the 8 ANSI colors </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor9ColorType7Term256E">
+<span id="_CPPv3N4ansi10StyleColor9ColorType7Term256E"></span><span id="_CPPv2N4ansi10StyleColor9ColorType7Term256E"></span><span class="target" id="structansi_1_1StyleColor_1a5e1571362eeaaa32429e3a561320cc0fa7f2882f054b4aa826aeb8b223e5e3bff"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Term256</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor9ColorType7Term256E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor9ColorType3RGBE">
+<span id="_CPPv3N4ansi10StyleColor9ColorType3RGBE"></span><span id="_CPPv2N4ansi10StyleColor9ColorType3RGBE"></span><span class="target" id="structansi_1_1StyleColor_1a5e1571362eeaaa32429e3a561320cc0fa0bd6ce7c54332ec6b2bbe6898584a31e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RGB</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor9ColorType3RGBE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor9ColorType4ANSIE">
+<span id="_CPPv3N4ansi10StyleColor9ColorType4ANSIE"></span><span id="_CPPv2N4ansi10StyleColor9ColorType4ANSIE"></span><span class="target" id="structansi_1_1StyleColor_1a5e1571362eeaaa32429e3a561320cc0fa349ebd1610e3502db990259e4c42ac53"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ANSI</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor9ColorType4ANSIE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor10StyleColorE5Color">
+<span id="_CPPv3N4ansi10StyleColor10StyleColorE5Color"></span><span id="_CPPv2N4ansi10StyleColor10StyleColorE5Color"></span><span id="ansi::StyleColor::StyleColor__Color"></span><span class="target" id="structansi_1_1StyleColor_1a4ae5bc8cd82167467928cd8bc14c4b23"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StyleColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4ansi5ColorE" title="ansi::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor10StyleColorE5Color" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs a new <a class="reference internal" href="#structansi_1_1StyleColor"><span class="std std-ref">StyleColor</span></a> using the provided ANSI color and sets the color type of ANSI. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>c</strong> – The ANSI color to use </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor10StyleColorE7uint8_t">
+<span id="_CPPv3N4ansi10StyleColor10StyleColorE7uint8_t"></span><span id="_CPPv2N4ansi10StyleColor10StyleColorE7uint8_t"></span><span id="ansi::StyleColor::StyleColor__uint8_t"></span><span class="target" id="structansi_1_1StyleColor_1adefa6fb464affa21ccd590b788b6069a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StyleColor</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor10StyleColorE7uint8_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs a new <a class="reference internal" href="#structansi_1_1StyleColor"><span class="std std-ref">StyleColor</span></a> using a color number and sets the color type to Term256. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>c</strong> – The color number to use </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor10StyleColorE7uint8_t7uint8_t7uint8_t">
+<span id="_CPPv3N4ansi10StyleColor10StyleColorE7uint8_t7uint8_t7uint8_t"></span><span id="_CPPv2N4ansi10StyleColor10StyleColorE7uint8_t7uint8_t7uint8_t"></span><span id="ansi::StyleColor::StyleColor__uint8_t.uint8_t.uint8_t"></span><span class="target" id="structansi_1_1StyleColor_1ac8e33ce72bc17f8ffecece90565dc540"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StyleColor</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">r</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">g</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor10StyleColorE7uint8_t7uint8_t7uint8_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs a new <a class="reference internal" href="#structansi_1_1StyleColor"><span class="std std-ref">StyleColor</span></a> using 3 values for the Red, Green, and Blue color channel and sets the color type to RGB. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> – The value for the Red channel </p></li>
+<li><p><strong>g</strong> – The value for the Green channel </p></li>
+<li><p><strong>b</strong> – The value for the Blue channel </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor4typeE">
+<span id="_CPPv3N4ansi10StyleColor4typeE"></span><span id="_CPPv2N4ansi10StyleColor4typeE"></span><span id="ansi::StyleColor::type__ansi::StyleColor::ColorType"></span><span class="target" id="structansi_1_1StyleColor_1acccfd42f80567c3d5ea97976997870b7"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N4ansi10StyleColorE" title="ansi::StyleColor"><span class="n"><span class="pre">StyleColor</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N4ansi10StyleColor9ColorTypeE" title="ansi::StyleColor::ColorType"><span class="n"><span class="pre">ColorType</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor4typeE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor9ansiColorE">
+<span id="_CPPv3N4ansi10StyleColor9ansiColorE"></span><span id="_CPPv2N4ansi10StyleColor9ansiColorE"></span><span id="ansi::StyleColor::ansiColor__ansi::Color"></span><span class="target" id="structansi_1_1StyleColor_1a5d7c942da25e9772b8f67da79ec3dec6"></span><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N4ansi5ColorE" title="ansi::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ansiColor</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor9ansiColorE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor3rgbE">
+<span id="_CPPv3N4ansi10StyleColor3rgbE"></span><span id="_CPPv2N4ansi10StyleColor3rgbE"></span><span id="ansi::StyleColor::rgb__std::tuple:uint8_t.uint8_t.uint8_t:"></span><span class="target" id="structansi_1_1StyleColor_1ae30979bb1e852d142243d0119011a070"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rgb</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor3rgbE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor4termE">
+<span id="_CPPv3N4ansi10StyleColor4termE"></span><span id="_CPPv2N4ansi10StyleColor4termE"></span><span id="ansi::StyleColor::term__uint8_t"></span><span class="target" id="structansi_1_1StyleColor_1a5e2e6fed6f3ae964be8579af5118cd45"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">term</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor4termE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10StyleColor5valueE">
+<span id="_CPPv3N4ansi10StyleColor5valueE"></span><span id="_CPPv2N4ansi10StyleColor5valueE"></span><span class="target" id="structansi_1_1StyleColor_1af2a908354dd0583262b625e45c12b440"></span><span class="k"><span class="pre">union</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N4ansi10StyleColorE" title="ansi::StyleColor"><span class="n"><span class="pre">StyleColor</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N4ansi10StyleColor5valueE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Holds the color value depending on the color type. </p>
+<p>Holds the color number for Term256, the 3 rgb values, or one of the 8 ANSI color values </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This union is tagged with the type field of <a class="reference internal" href="#structansi_1_1StyleColor"><span class="std std-ref">StyleColor</span></a> </p>
+</div>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi11set_raw_ttyEi">
+<span id="_CPPv3N4ansi11set_raw_ttyEi"></span><span id="_CPPv2N4ansi11set_raw_ttyEi"></span><span id="ansi::set_raw_tty__i"></span><span class="target" id="namespaceansi_1ad5f8017dcc48ace86c34e0b89164c9eb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">set_raw_tty</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fd</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi11set_raw_ttyEi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the terminal to RAW output. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This should only be called once, if called more than once or from a separate thread it’s undefined behavior </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fd</strong> – The file descriptor of the output to set </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi9reset_ttyEi">
+<span id="_CPPv3N4ansi9reset_ttyEi"></span><span id="_CPPv2N4ansi9reset_ttyEi"></span><span id="ansi::reset_tty__i"></span><span class="target" id="namespaceansi_1aa5b1d7bf2df1fea95be5cf7a8d78a08b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">reset_tty</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fd</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi9reset_ttyEi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reset the terminal to original functionality. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This should only be called once, if called more than once or from a separate thread it’s undefined behavior </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fd</strong> – The file descriptor of the output to set </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi10format_strEPKc">
+<span id="_CPPv3N4ansi10format_strEPKc"></span><span id="_CPPv2N4ansi10format_strEPKc"></span><span id="ansi::format_str__cCP"></span><span class="target" id="namespaceansi_1af8e7256e306cfa9b6e61ea79fca34966"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">format_str</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fstr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi10format_strEPKc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns a cached ANSI format string. </p>
+<p>Parses the input string using a tiny format language and returns a cached <code class="docutils literal notranslate"><span class="pre">printf</span></code> compatible string.</p>
+<p>The formatting is as follows:<ul class="simple">
+<li><p>All normal text is treated as text</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#[</span></code> begins a format modifier</p></li>
+<li><p>Inside the format modifier color and text modifiers can be specified (Bold, Red, 220, 20:10:2)</p></li>
+<li><p>Color can be specified as either an ANSI color, a Term256 color or rgb</p></li>
+<li><p>RGB is 3 numbers separated by colons, ie. 220:150:30</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">]</span></code> closes the format modifier</p></li>
+<li><p>#$ gets replaced with a <code class="docutils literal notranslate"><span class="pre">s</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">##</span></code> escapes the <code class="docutils literal notranslate"><span class="pre">#</span></code> character</p></li>
+</ul>
+</p>
+<p>An example: <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;Ansi&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">format_str</span><span class="p">(</span>
+        <span class="s">&quot;#[Bold, Underline, Red]Underlined and ##bolded## text&quot;</span>
+    <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fstr</strong> – ANSI format string </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_exception</span></span></span> – The format string is invalid and cannot be parsed </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A cached printf compatible format string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="ANSI API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="manipulators.html" class="btn btn-neutral float-right" title="std::ostream manipulators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, System.rat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

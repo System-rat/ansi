@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>std::ostream manipulators &mdash; ANSI  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Styles" href="style.html" />
+    <link rel="prev" title="Top-level types and functions" href="ansi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> ANSI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">ANSI Library Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ANSI API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ansi.html">Top-level types and functions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">std::ostream manipulators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ANSI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">ANSI API</a> &raquo;</li>
+      <li>std::ostream manipulators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/manipulators.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="std-ostream-manipulators">
+<h1>std::ostream manipulators<a class="headerlink" href="#std-ostream-manipulators" title="Permalink to this headline"></a></h1>
+<p>One way of using this library is to use the <cite>ansi::manip</cite> namespace
+which provides <cite>std::ostream</cite> manipulators (like <cite>std::endl</cite> and co.).</p>
+<p>The manipulators are named based on the effect they have on text, so
+the <cite>ansi::manip::bold</cite> manipulator boldens text.</p>
+<p>Certain manipulators take parameters and return a wrapper struct with
+a lambda so the global namespace isn’t polluted with an overload for
+lambdas with that kind of type signiture.</p>
+<p>Some example code:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#incldue &lt;Ansi&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">manip</span><span class="o">::</span><span class="n">bold</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Bold text&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">manip</span><span class="o">::</span><span class="n">color</span><span class="p">(</span><span class="n">ansi</span><span class="o">::</span><span class="n">Red</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Red and bold text&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">manip</span><span class="o">::</span><span class="n">reset</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Normal text&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>The supported text effects are:</dt><dd><ul class="simple">
+<li><p><cite>bold</cite></p></li>
+<li><p><cite>faint</cite></p></li>
+<li><p><cite>italic</cite></p></li>
+<li><p><cite>underline</cite></p></li>
+<li><p><cite>blink</cite> (usually not supported by terminals)</p></li>
+<li><p><cite>reverse</cite></p></li>
+<li><p><cite>hidden</cite></p></li>
+<li><p><cite>strikethrough</cite></p></li>
+</ul>
+</dd>
+</dl>
+<p>Individual text effects can be reset by prefixing the function name with <cite>no</cite>, ie. <cite>ansi::manip::nobold</cite>.
+Or all effects (including color) can be reset using <cite>ansi::manip::reset</cite>.</p>
+<p>The manip namespace has the following members:</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manipE">
+<span id="_CPPv3N4ansi5manipE"></span><span id="_CPPv2N4ansi5manipE"></span><span id="ansi::manip"></span><span class="target" id="namespaceansi_1_1manip"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="ansi.html#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">manip</span></span></span><a class="headerlink" href="#_CPPv4N4ansi5manipE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Manipulators for <code class="docutils literal notranslate"><span class="pre">std::ostream</span></code> </p>
+<p>Contains various manipulators for ANSI Compliant terminals. Each one applies a certain modifier to all following text (ie. bold, underline), or moves the cursor around and erases characters. These are meant to be used with the operator&lt;&lt; to change the output stream of stdout</p>
+<p>Some examples: <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;Ansi&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">manip</span><span class="o">::</span><span class="n">bold</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">manip</span><span class="o">::</span><span class="n">color</span><span class="p">(</span><span class="n">ansi</span><span class="o">::</span><span class="n">Red</span><span class="p">)</span> <span class="o">&lt;&lt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+ </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manip8modifierEK12TextModifierb">
+<span id="_CPPv3N4ansi5manip8modifierEK12TextModifierb"></span><span id="_CPPv2N4ansi5manip8modifierEK12TextModifierb"></span><span id="ansi::manip::modifier__TextModifierC.b"></span><span class="target" id="namespaceansi_1_1manip_1ab0e752a07f55e0c052a65bc1f01ca875"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi15ManipulatorFuncE" title="ansi::ManipulatorFunc"><span class="n"><span class="pre">ManipulatorFunc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modifier</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi12TextModifierE" title="ansi::TextModifier"><span class="n"><span class="pre">TextModifier</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mod</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">reset</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi5manip8modifierEK12TextModifierb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates a manipulator for the desired text styling. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mod</strong> – Text styling </p></li>
+<li><p><strong>reset</strong> – Should the styling be reset </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulator to be used with operator&lt;&lt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manip5colorEK5Colorb">
+<span id="_CPPv3N4ansi5manip5colorEK5Colorb"></span><span id="_CPPv2N4ansi5manip5colorEK5Colorb"></span><span id="ansi::manip::color__ColorC.b"></span><span class="target" id="namespaceansi_1_1manip_1a2da58a48674dd31cdd671df73dd07a8f"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi15ManipulatorFuncE" title="ansi::ManipulatorFunc"><span class="n"><span class="pre">ManipulatorFunc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi5ColorE" title="ansi::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_background</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi5manip5colorEK5Colorb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates a manipulator for the desired color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> – The color in question </p></li>
+<li><p><strong>is_background</strong> – Is the color for the background color of the terminal or the foreground. Defaults to foreground </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulator to be used with operator&lt;&lt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manip5colorEK7uint8_tb">
+<span id="_CPPv3N4ansi5manip5colorEK7uint8_tb"></span><span id="_CPPv2N4ansi5manip5colorEK7uint8_tb"></span><span id="ansi::manip::color__uint8_tC.b"></span><span class="target" id="namespaceansi_1_1manip_1a7714a4a4640fe7768f0b0619937066d6"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi15ManipulatorFuncE" title="ansi::ManipulatorFunc"><span class="n"><span class="pre">ManipulatorFunc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_background</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi5manip5colorEK7uint8_tb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates a manipulator for the desired color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> – The 256 term color to use </p></li>
+<li><p><strong>is_background</strong> – Is the color for the background color of the terminal or the foreground. Defaults to foreground </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulator to be used with operator&lt;&lt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manip5colorEK7uint8_tK7uint8_tK7uint8_tb">
+<span id="_CPPv3N4ansi5manip5colorEK7uint8_tK7uint8_tK7uint8_tb"></span><span id="_CPPv2N4ansi5manip5colorEK7uint8_tK7uint8_tK7uint8_tb"></span><span id="ansi::manip::color__uint8_tC.uint8_tC.uint8_tC.b"></span><span class="target" id="namespaceansi_1_1manip_1a0385467ae88fcbf649636320e19f1ebb"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi15ManipulatorFuncE" title="ansi::ManipulatorFunc"><span class="n"><span class="pre">ManipulatorFunc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">r</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">g</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">b</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_background</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi5manip5colorEK7uint8_tK7uint8_tK7uint8_tb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates a manipulator for the desired color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> – Red channel </p></li>
+<li><p><strong>g</strong> – Green channel </p></li>
+<li><p><strong>b</strong> – Blue channel </p></li>
+<li><p><strong>is_background</strong> – Is the color for the background color of the terminal or the foreground. Defaults to foreground </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulator to be used with operator&lt;&lt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manip11move_cursorEK15CursorDirectionK4uint">
+<span id="_CPPv3N4ansi5manip11move_cursorEK15CursorDirectionK4uint"></span><span id="_CPPv2N4ansi5manip11move_cursorEK15CursorDirectionK4uint"></span><span id="ansi::manip::move_cursor__CursorDirectionC.uintC"></span><span class="target" id="namespaceansi_1_1manip_1a11bbd865092de541d140a8b79340a3a7"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi15ManipulatorFuncE" title="ansi::ManipulatorFunc"><span class="n"><span class="pre">ManipulatorFunc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">move_cursor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">CursorDirection</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">direction</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">amount</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi5manip11move_cursorEK15CursorDirectionK4uint" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates a manipulator to move the cursor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> – The direction of the desired movement </p></li>
+<li><p><strong>amount</strong> – The amount to move in that direction </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulator to be used with operator&lt;&lt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manip11move_cursorEK4uintK4uint">
+<span id="_CPPv3N4ansi5manip11move_cursorEK4uintK4uint"></span><span id="_CPPv2N4ansi5manip11move_cursorEK4uintK4uint"></span><span id="ansi::manip::move_cursor__uintC.uintC"></span><span class="target" id="namespaceansi_1_1manip_1aa25330e1d49d7d91d9895d4d487741d3"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi15ManipulatorFuncE" title="ansi::ManipulatorFunc"><span class="n"><span class="pre">ManipulatorFunc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">move_cursor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi5manip11move_cursorEK4uintK4uint" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates a manipulator to move the cursor to the desired coordinates. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – X coord of the movement </p></li>
+<li><p><strong>y</strong> – Y coord of the movement </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulator to be used with operator&lt;&lt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi5manip16move_cursor_homeERNSt7ostreamE">
+<span id="_CPPv3N4ansi5manip16move_cursor_homeERNSt7ostreamE"></span><span id="_CPPv2N4ansi5manip16move_cursor_homeERNSt7ostreamE"></span><span id="ansi::manip::move_cursor_home__osR"></span><span class="target" id="namespaceansi_1_1manip_1a10379217a36596b164568e8f1471326f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">move_cursor_home</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">os</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi5manip16move_cursor_homeERNSt7ostreamE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Moves the cursor to home (0, 0) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>os</strong> – The stream to manipulate </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulated stream </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ansi.html" class="btn btn-neutral float-left" title="Top-level types and functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="style.html" class="btn btn-neutral float-right" title="Styles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, System.rat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

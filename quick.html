@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quickstart &mdash; ANSI  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ANSI API" href="api/index.html" />
+    <link rel="prev" title="ANSI Library Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ANSI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">ANSI Library Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-library">Using the library</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">ANSI API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ANSI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Quickstart</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quick.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quickstart">
+<span id="quick"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline"></a></h1>
+<p>This library is developed to be small, dependency-free, and easy to install/use. Simply clone the project
+with <cite>git</cite> and install using <cite>CMake</cite>.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<p>The library can be used as a CMake submodule by including it as a
+sub-project:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">ansi</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">&lt;target&gt;</span> <span class="s">ansi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The library can also be installed system-wide:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cmake --config Release -B build -S . -G Ninja -DINSTALL_ANSI<span class="o">=</span>ON -DBUILD_TESTING<span class="o">=</span>OFF
+$ <span class="nb">cd</span> build
+$ sudo ninja install
+</pre></div>
+</div>
+<p>There are a few options within the CMakeLists.txt file that can be configured:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>INSTALL_ANSI</cite> adds an install step to the build that installs the ansi lib system-wide</p></li>
+<li><p><cite>BUILD_TESTING</cite> enables tests for the library, probably not something you want enabled if
+you’re using the library as a sub-project</p></li>
+<li><p>By default the library is built and linked with sanitizers, switching to the <cite>Release</cite> configuration
+does not build or link with sanitizers</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="using-the-library">
+<h2>Using the library<a class="headerlink" href="#using-the-library" title="Permalink to this headline"></a></h2>
+<p>The library contains functions and classes for different codding styles, the <cite>ansi::manip</cite> namespace
+contains manipulator functions to be used with streaming outputs the same way <cite>std::endl</cite> and co.
+are used. The <cite>ansi::styling</cite> namespace is for a more “stylesheet” oriented workflow, styles can be
+instantiated and the text is pre-computed and can then be applied and reused. And for more <cite>printf</cite>
+oriented workflows the <cite>ansi::format_str</cite> (and subsequently the <cite>ANSI</cite> macro) can be used to create
+a format string from a small custom language.</p>
+<p>An example of all 3 styles:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;Ansi&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">manip</span><span class="o">::</span><span class="n">bold</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">manip</span><span class="o">::</span><span class="n">color</span><span class="p">(</span><span class="n">ansi</span><span class="o">::</span><span class="n">Red</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Red text&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="n">ansi</span><span class="o">::</span><span class="n">styling</span><span class="o">::</span><span class="n">Style</span> <span class="n">style1</span><span class="p">(</span><span class="n">ansi</span><span class="o">::</span><span class="n">StyleColor</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">{</span> <span class="n">ansi</span><span class="o">::</span><span class="n">Bold</span><span class="p">,</span> <span class="n">ansi</span><span class="o">::</span><span class="n">Underline</span> <span class="p">});</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">style1</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="n">ANSI</span><span class="p">(</span><span class="s">&quot;#[Underline, Strikethrough, 150:30:240]Text with a #$</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">),</span> <span class="s">&quot;variable&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more details on the various functions and types, see <a class="reference internal" href="api/index.html#api"><span class="std std-ref">ANSI API</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="ANSI Library Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/index.html" class="btn btn-neutral float-right" title="ANSI API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, System.rat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

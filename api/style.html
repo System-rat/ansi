@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Styles &mdash; ANSI  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="std::ostream manipulators" href="manipulators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> ANSI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">ANSI Library Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ANSI API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ansi.html">Top-level types and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulators.html">std::ostream manipulators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Styles</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ANSI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">ANSI API</a> &raquo;</li>
+      <li>Styles</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/style.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="styles">
+<h1>Styles<a class="headerlink" href="#styles" title="Permalink to this headline"></a></h1>
+<p>Another way of printing ANSI formatted text is to use a reusable style
+object. It precomputes ANSI formatted text and applies the style to
+a string which can then be written to the output stream.</p>
+<p>An example:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;Ansi&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// NOTE: The first parameter is a StyleColor which can be</span>
+    <span class="c1">// One of 3 formats: RGB, ANSI, or Term256</span>
+    <span class="c1">// We can pass the ANSI color directly since the StyleColor</span>
+    <span class="c1">// struct has an implicit constructor that takes an ANSI</span>
+    <span class="c1">// color</span>
+    <span class="k">auto</span> <span class="n">st</span> <span class="o">=</span> <span class="n">ansi</span><span class="o">::</span><span class="n">styling</span><span class="o">::</span><span class="n">Style</span><span class="p">(</span><span class="n">ansi</span><span class="o">::</span><span class="n">Red</span><span class="p">,</span> <span class="p">{</span>
+        <span class="n">ansi</span><span class="o">::</span><span class="n">Underline</span>
+    <span class="p">});</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text1&quot;</span><span class="p">)</span>
+        <span class="o">&lt;&lt;</span> <span class="s">&quot; and &quot;</span>
+        <span class="o">&lt;&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text2&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Uses one of the 256 terminal colors by implicitly using</span>
+    <span class="c1">// A StyleColor of type Term256</span>
+    <span class="k">auto</span> <span class="n">st256</span> <span class="o">=</span> <span class="n">ansi</span><span class="o">::</span><span class="n">styling</span><span class="o">::</span><span class="n">Style</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="p">{</span>
+        <span class="n">ansi</span><span class="o">::</span><span class="n">Bold</span>
+    <span class="p">});</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">st256</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text1&quot;</span><span class="p">)</span>
+        <span class="o">&lt;&lt;</span> <span class="s">&quot; and &quot;</span>
+        <span class="o">&lt;&lt;</span> <span class="n">st256</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text2&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Since the RGB StyleColor takes 3 parameters it has to</span>
+    <span class="c1">// be manually instantiated</span>
+    <span class="k">auto</span> <span class="n">strgb</span> <span class="o">=</span> <span class="n">ansi</span><span class="o">::</span><span class="n">styling</span><span class="o">::</span><span class="n">Style</span><span class="p">(</span>
+        <span class="n">ansi</span><span class="o">::</span><span class="n">StyleColor</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">177</span><span class="p">,</span> <span class="mi">249</span><span class="p">),</span> <span class="p">{</span>
+        <span class="n">ansi</span><span class="o">::</span><span class="n">Bold</span>
+    <span class="p">});</span>
+
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">strgb</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text1&quot;</span><span class="p">)</span>
+        <span class="o">&lt;&lt;</span> <span class="s">&quot; and &quot;</span>
+        <span class="o">&lt;&lt;</span> <span class="n">strgb</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text2&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The styling namespace has the following members:</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi7stylingE">
+<span id="_CPPv3N4ansi7stylingE"></span><span id="_CPPv2N4ansi7stylingE"></span><span id="ansi::styling"></span><span class="target" id="namespaceansi_1_1styling"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="ansi.html#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">styling</span></span></span><a class="headerlink" href="#_CPPv4N4ansi7stylingE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#classansi_1_1styling_1_1Style"><span class="std std-ref">Style</span></a> classes for text. </p>
+<p>Contains classes for applying a set of styles to some text.</p>
+<p>Some examples: <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;Ansi&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ansi</span><span class="o">::</span><span class="n">styling</span><span class="o">::</span><span class="n">Style</span><span class="p">(</span><span class="n">ansi</span><span class="o">::</span><span class="n">styling</span><span class="o">::</span><span class="n">StyleColor</span><span class="p">(</span><span class="n">ansi</span><span class="o">::</span><span class="n">Yellow</span><span class="p">,</span>
+<span class="p">{</span><span class="n">ansi</span><span class="o">::</span><span class="n">Bold</span><span class="p">,</span> <span class="n">ansi</span><span class="o">::</span><span class="n">Underline</span><span class="p">}).</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;Text&quot;</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+ </p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi7styling5StyleE">
+<span id="_CPPv3N4ansi7styling5StyleE"></span><span id="_CPPv2N4ansi7styling5StyleE"></span><span id="ansi::styling::Style"></span><span class="target" id="classansi_1_1styling_1_1Style"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Style</span></span></span><a class="headerlink" href="#_CPPv4N4ansi7styling5StyleE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;&gt;</em></div>
+<p>Text styling. </p>
+<p>Holds styling information to be applied to text </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4ansi7styling5Style5StyleE10StyleColorRRNSt16initializer_listIN4ansi12TextModifierEEE">
+<span id="_CPPv3N4ansi7styling5Style5StyleE10StyleColorRRNSt16initializer_listIN4ansi12TextModifierEEE"></span><span id="_CPPv2N4ansi7styling5Style5StyleE10StyleColorRRNSt16initializer_listIN4ansi12TextModifierEEE"></span><span id="ansi::styling::Style::Style__StyleColor.std::initializer_list:ansi::TextModifier:RR"></span><span class="target" id="classansi_1_1styling_1_1Style_1ad989ace48494f75ea4e4e1dccbf5eb83"></span><span class="sig-name descname"><span class="n"><span class="pre">Style</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ansi.html#_CPPv4N4ansi10StyleColorE" title="ansi::StyleColor"><span class="n"><span class="pre">StyleColor</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="ansi.html#_CPPv44ansi" title="ansi"><span class="n"><span class="pre">ansi</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="ansi.html#_CPPv4N4ansi12TextModifierE" title="ansi::TextModifier"><span class="n"><span class="pre">TextModifier</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">m</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4ansi7styling5Style5StyleE10StyleColorRRNSt16initializer_listIN4ansi12TextModifierEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs a new <a class="reference internal" href="#classansi_1_1styling_1_1Style"><span class="std std-ref">Style</span></a> using a color and a list of modifiers. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> – The color of the text </p></li>
+<li><p><strong>m</strong> – A list of modifiers to apply to text </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4ansi7styling5Style5applyEPKc">
+<span id="_CPPv3NK4ansi7styling5Style5applyEPKc"></span><span id="_CPPv2NK4ansi7styling5Style5applyEPKc"></span><span id="ansi::styling::Style::apply__cCPC"></span><span class="target" id="classansi_1_1styling_1_1Style_1a7d06aaaae167cbf17f2131c583ffcb4f"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ansi.html#_CPPv4N4ansi15ManipulatorFuncE" title="ansi::ManipulatorFunc"><span class="n"><span class="pre">ManipulatorFunc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">apply</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4ansi7styling5Style5applyEPKc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Applies the style to text. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Resets all styling after the text is written to the ostream </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> – The text to apply the style to </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The manipulator to be used with operator&lt;&lt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="manipulators.html" class="btn btn-neutral float-left" title="std::ostream manipulators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, System.rat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
