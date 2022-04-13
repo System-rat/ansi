@@ -5,10 +5,14 @@ on:
     branches: [master]
     paths:
       - 'docs/**'
+      - 'src/**'
+      - 'include/**'
   pull_request:
     branches: [master]
     paths:
       - 'docs/**'
+      - 'src/**'
+      - 'include/**'
 
 jobs:
   build:
