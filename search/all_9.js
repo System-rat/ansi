@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value_19',['value',['../structansi_1_1StyleColor.html#af2a908354dd0583262b625e45c12b440',1,'ansi::StyleColor']]]
+  ['_7estylecolor_20',['~StyleColor',['../structansi_1_1StyleColor.html#a67eb409e4af44a24d1a9597eb4e4b74a',1,'ansi::StyleColor']]]
 ];
