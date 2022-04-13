@@ -35,6 +35,29 @@ Style::Style(StyleColor c, std::initializer_list<ansi::TextModifier> &&m)
     compute_format_text();
 };
 
+Style::Style() : color(), modifiers(), format_text(){};
+
+Style::Style(const Style &other)
+    : color(other.color), modifiers(other.modifiers) {
+    compute_format_text();
+}
+
+Style::Style(Style &&other)
+    : color(std::move(other.color)), modifiers(std::move(other.modifiers)),
+      format_text(std::move(other.format_text)){};
+
+Style &Style::operator=(const Style &other) {
+    this->~Style();
+    new (this) Style(other);
+    return *this;
+}
+
+Style &Style::operator=(Style &&other) {
+    this->~Style();
+    new (this) Style(std::move(other));
+    return *this;
+}
+
 const ansi::ManipulatorFunc Style::apply(const char *text) const {
     const std::string ftext = format_text.str();
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
@@ -55,15 +78,14 @@ void Style::compute_format_text() {
 
     switch (color.type) {
     case StyleColor::ANSI:
-        mc = ansi::manip::color(color.value.ansiColor);
+        mc = ansi::manip::color(color.ansiColor);
         break;
     case StyleColor::Term256:
-        mc = ansi::manip::color(color.value.term);
+        mc = ansi::manip::color(color.term);
         break;
     case StyleColor::RGB:
-        mc = ansi::manip::color(std::get<0>(color.value.rgb),
-                                std::get<1>(color.value.rgb),
-                                std::get<2>(color.value.rgb));
+        mc = ansi::manip::color(std::get<0>(color.rgb), std::get<1>(color.rgb),
+                                std::get<2>(color.rgb));
         break;
 
     default:

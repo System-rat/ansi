@@ -71,6 +71,41 @@ class Style {
      */
     const ManipulatorFunc apply(const char *text) const;
 
+    /**
+     * @brief Default constructor
+     */
+    Style();
+
+    /**
+     * @brief Copy constructor
+     *
+     * @param other The Style object to copy from
+     */
+    Style(const Style &other);
+
+    /**
+     * @brief Move constructor
+     *
+     * @param other The Style object to move from
+     */
+    Style(Style &&other);
+
+    /**
+     * @brief Trivial copy assignment operator
+     *
+     * @param other The Style object to copy from
+     * @return The assigned object
+     */
+    Style &operator=(const Style &other);
+
+    /**
+     * @brief Trivial move assignment operator
+     *
+     * @param other The Style object to move from
+     * @return The assigned object
+     */
+    Style &operator=(Style &&other);
+
   private:
     /**
      * @brief Holds the text color and type of color (ANSI, Term256, RGB)

@@ -120,21 +120,21 @@ struct StyleColor {
         ansi::Color ansiColor;
         std::tuple<uint8_t, uint8_t, uint8_t> rgb;
         uint8_t term;
-    } value;
+    };
 
     /**
      * @brief Constructs a new StyleColor using the provided ANSI color and sets
      * the color type of ANSI
      * @param c The ANSI color to use
      */
-    StyleColor(Color c) : type(ANSI), value({.ansiColor = c}){};
+    StyleColor(Color c) : type(ANSI), ansiColor(c){};
     /**
      * @brief Constructs a new StyleColor using a color number and sets the
      * color type to Term256
      *
      * @param c The color number to use
      */
-    StyleColor(uint8_t c) : type(Term256), value({.term = c}){};
+    StyleColor(uint8_t c) : type(Term256), term(c){};
     /**
      * @brief Constructs a new StyleColor using 3 values for the Red, Green, and
      * Blue color channel and sets the color type to RGB
@@ -144,8 +144,99 @@ struct StyleColor {
      * @param b The value for the Blue channel
      */
     StyleColor(uint8_t r, uint8_t g, uint8_t b)
-        : type(RGB),
-          value({.rgb = std::tuple<uint8_t, uint8_t, uint8_t>(r, g, b)}){};
+        : type(RGB), rgb(std::tuple<uint8_t, uint8_t, uint8_t>(r, g, b)){};
+
+    /**
+     * @brief Default constructor
+     */
+    StyleColor() : type(ANSI), ansiColor(ansi::Default){};
+
+    /**
+     * @brief Copy constructor
+     *
+     * @param other The StyleColor object to copy from
+     */
+    StyleColor(const StyleColor &other) {
+        // If only c++ actually supported Sum types this wouldn't need to be
+        // done
+        type = other.type;
+        switch (type) {
+        case ANSI:
+            ansiColor = other.ansiColor;
+            break;
+
+        case Term256:
+            term = other.term;
+            break;
+        case RGB:
+            rgb = other.rgb;
+        default:
+            // Unreachable
+            break;
+        }
+    }
+
+    /**
+     * @brief Move constructor
+     *
+     * @param other The StyleColor object to move from
+     */
+    StyleColor(StyleColor &&other) {
+        type = other.type;
+        switch (type) {
+        case ANSI:
+            ansiColor = other.ansiColor;
+            break;
+
+        case Term256:
+            term = other.term;
+            break;
+        case RGB:
+            rgb = std::move(other.rgb);
+        default:
+            // Unreachable
+            break;
+        }
+    }
+
+    /**
+     * @brief Trivial copy assignment operator
+     *
+     * @param rhs The StyleColor object to copy from
+     * @return The assigned object
+     */
+    StyleColor &operator=(const StyleColor &rhs) {
+        this->~StyleColor();
+        new (this) StyleColor(rhs);
+        return *this;
+    }
+
+    /**
+     * @brief Trivial move assignment operator
+     *
+     * @param rhs The StyleColor object to copy from
+     * @return The assigned object
+     */
+    StyleColor &operator=(StyleColor &&rhs) {
+        this->~StyleColor();
+        new (this) StyleColor(std::move(rhs));
+        return *this;
+    }
+
+    /**
+     * @brief Discriminated union destructor
+     */
+    ~StyleColor() {
+        switch (type) {
+        case RGB:
+            rgb.~tuple();
+            break;
+
+        default:
+            // No need to do anything special with the other values
+            break;
+        }
+    }
 };
 
 /**
