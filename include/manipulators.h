@@ -158,7 +158,7 @@ const ManipulatorFunc color(const uint8_t r, const uint8_t g, const uint8_t b,
  * @return The manipulator to be used with operator<<
  */
 const ManipulatorFunc move_cursor(const CursorDirection direction,
-                                  const uint amount);
+                                  const uint8_t amount);
 
 /**
  * @brief Creates a manipulator to move the cursor to the desired coordinates
@@ -167,7 +167,7 @@ const ManipulatorFunc move_cursor(const CursorDirection direction,
  * @param y Y coord of the movement
  * @return The manipulator to be used with operator<<
  */
-const ManipulatorFunc move_cursor(const uint x, const uint y);
+const ManipulatorFunc move_cursor(const uint8_t x, const uint8_t y);
 
 /**
  * @brief Moves the cursor to home (0, 0)

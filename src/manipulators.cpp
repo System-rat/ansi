@@ -129,7 +129,7 @@ const ManipulatorFunc color(const uint8_t r, const uint8_t g, const uint8_t b,
 }
 
 const ManipulatorFunc move_cursor(const CursorDirection direction,
-                                  const uint amount) {
+                                  const uint8_t amount) {
     std::string escape("\e[");
     escape += std::to_string(amount);
     escape += direction;
@@ -139,7 +139,7 @@ const ManipulatorFunc move_cursor(const CursorDirection direction,
     });
 }
 
-const ManipulatorFunc move_cursor(const uint x, const uint y) {
+const ManipulatorFunc move_cursor(const uint8_t x, const uint8_t y) {
     std::string escape("\e[");
     escape += std::to_string(x);
     escape += ';';

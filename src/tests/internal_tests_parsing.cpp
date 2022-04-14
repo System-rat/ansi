@@ -30,13 +30,10 @@ TEST(Internals, Lexing) {
     const char *txt = "#[Bold, 123]Text #$";
 
     std::vector<Token> expectedOutput = {
-        Token{.type = LexToken::Start, .start = "#[", .length = 2},
-        Token{.type = LexToken::Ident, .start = "Bold", .length = 4},
-        Token{.type = LexToken::Comma, .start = ",", .length = 1},
-        Token{.type = LexToken::Number, .start = "123", .length = 3},
-        Token{.type = LexToken::End, .start = "]", .length = 1},
-        Token{.type = LexToken::Text, .start = "Text ", .length = 5},
-        Token{.type = LexToken::Var, .start = "#$", .length = 2}};
+        Token{LexToken::Start, "#[", 2}, Token{LexToken::Ident, "Bold", 4},
+        Token{LexToken::Comma, ",", 1},  Token{LexToken::Number, "123", 3},
+        Token{LexToken::End, "]", 1},    Token{LexToken::Text, "Text ", 5},
+        Token{LexToken::Var, "#$", 2}};
 
     Lexer l = Lexer(txt);
 

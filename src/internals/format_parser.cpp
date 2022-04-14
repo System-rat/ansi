@@ -31,7 +31,7 @@
 
 Token Lexer::get_token() {
     if (is_at_end())
-        return Token{.type = LexToken::EOFToken, .start = cursor};
+        return Token{LexToken::EOFToken, cursor};
     if (!is_in_context) {
         switch (*cursor) {
         case '#': {
@@ -39,8 +39,7 @@ Token Lexer::get_token() {
                 throw std::runtime_error("Unexpected end of input");
 
             if (*(cursor + 1) == '$') {
-                auto tok =
-                    Token{.type = LexToken::Var, .start = cursor, .length = 2};
+                auto tok = Token{LexToken::Var, cursor, 2};
                 cursor += 2;
 
                 return tok;
@@ -81,8 +80,7 @@ Token Lexer::lex_number() {
         offset++;
     }
 
-    auto token =
-        Token{.type = LexToken::Number, .start = cursor, .length = offset};
+    auto token = Token{LexToken::Number, cursor, offset};
     cursor += offset;
     offset = 0;
 
@@ -95,8 +93,7 @@ Token Lexer::lex_ident() {
         offset++;
     }
 
-    auto token =
-        Token{.type = LexToken::Ident, .start = cursor, .length = offset};
+    auto token = Token{LexToken::Ident, cursor, offset};
     cursor += offset;
     offset = 0;
 
@@ -113,8 +110,7 @@ Token Lexer::lex_format() {
     switch (*(cursor + offset)) {
     case '#': {
         if (*(cursor + offset + 1) == '[') {
-            auto token =
-                Token{.type = LexToken::Start, .start = cursor, .length = 2};
+            auto token = Token{LexToken::Start, cursor, 2};
             cursor += 2;
 
             return token;
@@ -125,23 +121,21 @@ Token Lexer::lex_format() {
         break;
     }
     case ',': {
-        auto token =
-            Token{.type = LexToken::Comma, .start = cursor, .length = 1};
+        auto token = Token{LexToken::Comma, cursor, 1};
         cursor++;
 
         return token;
         break;
     }
     case ':': {
-        auto token =
-            Token{.type = LexToken::Colon, .start = cursor, .length = 1};
+        auto token = Token{LexToken::Colon, cursor, 1};
         cursor++;
 
         return token;
         break;
     }
     case ']': {
-        auto token = Token{.type = LexToken::End, .start = cursor, .length = 1};
+        auto token = Token{LexToken::End, cursor, 1};
         cursor++;
         is_in_context = false;
 
@@ -193,8 +187,7 @@ Token Lexer::lex_text() {
     }
 
 HERESY:
-    auto token =
-        Token{.type = LexToken::Text, .start = cursor, .length = offset};
+    auto token = Token{LexToken::Text, cursor, offset};
     cursor += offset;
     offset = 0;
 

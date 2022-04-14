@@ -47,3 +47,25 @@ TEST(Ansi, Movement) {
 
     ASSERT_EQ(s.str(), "\e[H\e[20A");
 }
+
+TEST(Ansi, Styling) {
+    std::stringstream s;
+    ansi::styling::Style st(ansi::Red, {ansi::Bold});
+    s << st.apply("txt");
+
+    ASSERT_EQ(s.str(), "\e[31m\e[1mtxt\e[0m");
+}
+
+TEST(Ansi, StylingRGB) {
+    std::stringstream s;
+    ansi::styling::Style st(ansi::StyleColor(1, 1, 1), {ansi::Bold});
+    s << st.apply("txt");
+
+    ASSERT_EQ(s.str(), "\e[38;2;1;1;1m\e[1mtxt\e[0m");
+}
+
+TEST(Ansi, FormatStr) {
+    const char *str = ANSI("#[Red, Bold]txt#[] ## #$");
+
+    ASSERT_TRUE(strcmp(str, "\e[0m\e[31m\e[1mtxt\e[0m # %s\e[0m") == 0);
+}
