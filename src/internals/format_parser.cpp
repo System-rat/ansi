@@ -23,6 +23,7 @@
 #include "format_parser.h"
 #include "manipulators.h"
 #include <cstring>
+#include <limits>
 #include <regex>
 #include <string>
 #include <vector>
