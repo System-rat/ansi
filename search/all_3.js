@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['format_5fstr_8',['format_str',['../namespaceansi.html#af8e7256e306cfa9b6e61ea79fca34966',1,'ansi']]]
+  ['format_5fstr_8',['format_str',['../namespaceansi.html#a2a78e082c2e85bd362127490bf8544a4',1,'ansi']]]
 ];

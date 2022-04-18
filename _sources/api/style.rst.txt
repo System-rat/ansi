@@ -2,7 +2,7 @@ Styles
 ======
 
 Another way of printing ANSI formatted text is to use a reusable style
-object. It precomputes ANSI formatted text and applies the style to
+object. It pre-computes ANSI formatted text and applies the style to
 a string which can then be written to the output stream.
 
 An example:

@@ -1,6 +1,6 @@
 .. _quick:
 
-Quickstart
+Quick-start
 ==========
 
 This library is developed to be small, dependency-free, and easy to install/use. Simply clone the project
@@ -39,7 +39,7 @@ Using the library
 
 The library contains functions and classes for different codding styles, the `ansi::manip` namespace
 contains manipulator functions to be used with streaming outputs the same way `std::endl` and co.
-are used. The `ansi::styling` namespace is for a more "stylesheet" oriented workflow, styles can be
+are used. The `ansi::styling` namespace is for a more "style-sheet" oriented workflow, styles can be
 instantiated and the text is pre-computed and can then be applied and reused. And for more `printf`
 oriented workflows the `ansi::format_str` (and subsequently the `ANSI` macro) can be used to create
 a format string from a small custom language.

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['color_28',['color',['../namespaceansi_1_1manip.html#a2da58a48674dd31cdd671df73dd07a8f',1,'ansi::manip::color(const Color c, bool is_background=false)'],['../namespaceansi_1_1manip.html#a7714a4a4640fe7768f0b0619937066d6',1,'ansi::manip::color(const uint8_t color, bool is_background=false)'],['../namespaceansi_1_1manip.html#a0385467ae88fcbf649636320e19f1ebb',1,'ansi::manip::color(const uint8_t r, const uint8_t g, const uint8_t b, bool is_background=false)']]]
+  ['color_28',['color',['../namespaceansi_1_1manip.html#a64dbcc7a9fc98ed46d86a2c3c6f40a3e',1,'ansi::manip::color(Color c, bool is_background=false) -&gt; ManipulatorFunc'],['../namespaceansi_1_1manip.html#a753e6e39561b125978101b0ccbf2a8f2',1,'ansi::manip::color(uint8_t color, bool is_background=false) -&gt; ManipulatorFunc'],['../namespaceansi_1_1manip.html#af6ce9a538f73c33587f71a005dbe66ba',1,'ansi::manip::color(uint8_t r, uint8_t g, uint8_t b, bool is_background=false) -&gt; ManipulatorFunc']]]
 ];
