@@ -71,7 +71,7 @@ auto Style::apply(const char *text) const -> ManipulatorFunc {
     });
 }
 
-void Style::compute_format_text() {
+auto Style::compute_format_text() -> void {
     format_text.clear();
     format_text.str(std::string());
     ManipulatorFunc mc = ansi::manip::color(ansi::Default);

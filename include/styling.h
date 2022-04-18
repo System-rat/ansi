@@ -120,7 +120,7 @@ class Style {
 
     std::stringstream format_text;
 
-    void compute_format_text();
+    auto compute_format_text() -> void;
 };
 
 } // namespace styling

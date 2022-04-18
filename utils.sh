@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 # A Simple shell script for some common tasks like configuring, testing and tidying
 
+error() {
+    if [[ -t 1 ]]
+    then
+        echo -ne "\e[31m";
+    fi
+    echo $@;
+    if [[ -t 1 ]]
+    then
+        echo -ne "\e[0m";
+    fi
+}
+
 case $1 in
     configure)
         FLAGS=()
@@ -13,7 +25,7 @@ case $1 in
                 release)
                     FLAGS+=("-DCMAKE_BUILD_TYPE=Debug");;
                 *)
-                    echo "unkown build type";
+                    error "unkown build type:" $2;
                     exit 1;
             esac
         fi
@@ -26,6 +38,20 @@ case $1 in
         cmake -B build -S . -G Ninja $FLAGS;;
 
     test)
+        if [[ -n $2 ]]
+        then
+            if [[ $2 == "--force" ]]
+            then
+                if [[ -d build ]]
+                then
+                    rm -rf build
+                fi
+            else
+                error "unkown option:" $2;
+                exit 1;
+            fi
+        fi
+
         if [[ -d build ]]
         then
             cd build && ninja tests && ctest
@@ -38,12 +64,18 @@ case $1 in
         clang-tidy src/**/*.cpp src/**/*.h src/*.cpp include/*.h -p build/;;
 
     *)
-        echo -e "USAGE utils.sh <command>";
-        echo;
-        echo "Simple util shell script for building and linting";
-        echo -e "  configure [mode] \tRun cmake in [mode]";
-        echo -e "  tidy             \tRun clang-tidy";
-        echo -e "  test             \tConfigure and run tests";
+        echo -e \
+"USAGE utils.sh <command>
+
+Simple util shell script for building and linting
+  configure [mode] \tRun cmake with an optional build type
+                   \tSupported build types: debug, release
+
+  tidy             \tRun clang-tidy
+
+  test [--force]   \tConfigure and run tests
+                   \tIf --force is specified, the tests
+                   \twill be forced to rebuild";
         exit 1;
         ;;
 esac
