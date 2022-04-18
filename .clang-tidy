@@ -1,0 +1,1 @@
+Checks: 'readability-*, modernize-*, clang-analyzer-*, bugprone-*, concurrency-*, performance-*, -readability-magic-numbers'

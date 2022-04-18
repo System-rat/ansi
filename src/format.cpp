@@ -24,7 +24,7 @@
 #include "internals/format_parser.h"
 #include <unordered_map>
 
-const char *ansi::format_str(const char *fstr) {
+auto ansi::format_str(const char *fstr) -> const char * {
     // Thread local so we don't get some funky access violations
     thread_local static std::unordered_map<std::string, std::string> cache;
 

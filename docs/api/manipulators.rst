@@ -9,7 +9,7 @@ the `ansi::manip::bold` manipulator boldens text.
 
 Certain manipulators take parameters and return a wrapper struct with
 a lambda so the global namespace isn't polluted with an overload for
-lambdas with that kind of type signiture.
+lambdas with that kind of type signature.
 
 Some example code:
 

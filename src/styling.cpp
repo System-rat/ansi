@@ -31,39 +31,39 @@ namespace ansi {
 namespace styling {
 
 Style::Style(StyleColor c, std::initializer_list<ansi::TextModifier> &&m)
-    : color(c), modifiers(m) {
+    : color(std::move(c)), modifiers(m) {
     compute_format_text();
 };
 
-Style::Style() : color(), modifiers(), format_text(){};
+Style::Style() = default;
 
 Style::Style(const Style &other)
     : color(other.color), modifiers(other.modifiers) {
     compute_format_text();
 }
 
-Style::Style(Style &&other)
+Style::Style(Style &&other) noexcept
     : color(std::move(other.color)), modifiers(std::move(other.modifiers)),
       format_text(std::move(other.format_text)){};
 
-Style &Style::operator=(const Style &other) {
+auto Style::operator=(const Style &other) -> Style & {
     this->~Style();
     new (this) Style(other);
     return *this;
 }
 
-Style &Style::operator=(Style &&other) {
+auto Style::operator=(Style &&other) noexcept -> Style & {
     this->~Style();
     new (this) Style(std::move(other));
     return *this;
 }
 
-const ansi::ManipulatorFunc Style::apply(const char *text) const {
+auto Style::apply(const char *text) const -> ManipulatorFunc {
     const std::string ftext = format_text.str();
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
-        write_if_term(os, ftext.c_str(), ftext.length());
+        write_if_term(os, ftext.c_str(), (std::streamsize)ftext.length());
 
-        os.write(text, strlen(text));
+        os.write(text, (std::streamsize)strlen(text));
 
         ansi::manip::reset(os);
 

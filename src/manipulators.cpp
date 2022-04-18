@@ -25,9 +25,7 @@
 #include "internals/utils.h"
 #include <iostream>
 
-// TODO: Make this a header library?
-
-#define __ANSI_IMPL(name, __CODE)                                              \
+#define ANSI_IMPL(name, __CODE)                                                \
     std::ostream &name(std::ostream &os) {                                     \
         return write_if_term(os, "\e[" #__CODE, sizeof("\e[" #__CODE) - 1);    \
     }
@@ -35,43 +33,41 @@
 namespace ansi {
 namespace manip {
 
-__ANSI_IMPL(bold, 1m)
-__ANSI_IMPL(faint, 2m)
-__ANSI_IMPL(italic, 3m)
-__ANSI_IMPL(underline, 4m)
-__ANSI_IMPL(blink, 5m)
-__ANSI_IMPL(reverse, 6m)
-__ANSI_IMPL(hidden, 7m)
-__ANSI_IMPL(strikethrough, 8m)
+ANSI_IMPL(bold, 1m)          // NOLINT
+ANSI_IMPL(faint, 2m)         // NOLINT
+ANSI_IMPL(italic, 3m)        // NOLINT
+ANSI_IMPL(underline, 4m)     // NOLINT
+ANSI_IMPL(blink, 5m)         // NOLINT
+ANSI_IMPL(reverse, 6m)       // NOLINT
+ANSI_IMPL(hidden, 7m)        // NOLINT
+ANSI_IMPL(strikethrough, 8m) // NOLINT
 
-__ANSI_IMPL(nobold, 21m)
-__ANSI_IMPL(nofaint, 22m)
-__ANSI_IMPL(noitalic, 23m)
-__ANSI_IMPL(nounderline, 24m)
-__ANSI_IMPL(noblink, 25m)
-__ANSI_IMPL(noreverse, 26m)
-__ANSI_IMPL(nohidden, 27m)
-__ANSI_IMPL(nostrikethrough, 28m)
+ANSI_IMPL(nobold, 21m)          // NOLINT
+ANSI_IMPL(nofaint, 22m)         // NOLINT
+ANSI_IMPL(noitalic, 23m)        // NOLINT
+ANSI_IMPL(nounderline, 24m)     // NOLINT
+ANSI_IMPL(noblink, 25m)         // NOLINT
+ANSI_IMPL(noreverse, 26m)       // NOLINT
+ANSI_IMPL(nohidden, 27m)        // NOLINT
+ANSI_IMPL(nostrikethrough, 28m) // NOLINT
 
-__ANSI_IMPL(reset, 0m)
+ANSI_IMPL(reset, 0m) // NOLINT
 
-__ANSI_IMPL(erase_screen_to_end, 0J)
-__ANSI_IMPL(erase_screen_to_beginning, 1J)
-__ANSI_IMPL(erase_screen, 2J\r)
-__ANSI_IMPL(erase_line_to_end, 0K)
-__ANSI_IMPL(erase_line_to_beginning, 1K)
-__ANSI_IMPL(erase_line, 2K\r)
+ANSI_IMPL(erase_screen_to_end, 0J)       // NOLINT
+ANSI_IMPL(erase_screen_to_beginning, 1J) // NOLINT
+ANSI_IMPL(erase_screen, 2J\r)            // NOLINT
+ANSI_IMPL(erase_line_to_end, 0K)         // NOLINT
+ANSI_IMPL(erase_line_to_beginning, 1K)   // NOLINT
+ANSI_IMPL(erase_line, 2K\r)              // NOLINT
 
-__ANSI_IMPL(hide_cursor, ?25l)
-__ANSI_IMPL(show_cursor, ?25h)
+ANSI_IMPL(hide_cursor, ?25l) //NOLINT
+ANSI_IMPL(show_cursor, ?25h) //NOLINT
 
-// TODO: Too many copies maybe?
-
-const ManipulatorFunc modifier(const TextModifier mod, bool reset) {
+auto modifier(TextModifier mod, bool reset) -> ManipulatorFunc {
     std::string escape;
     escape.reserve(5);
     escape += "\e[";
-    // Edge case for the bold modifier because ANSI go brrrr
+    // Edge case for the bold modifier because ANSI go brr
     if (reset && mod == ansi::Bold) {
         escape += "22";
     } else {
@@ -79,11 +75,12 @@ const ManipulatorFunc modifier(const TextModifier mod, bool reset) {
     }
     escape += 'm';
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
-        return write_if_term(os, escape.c_str(), escape.length());
+        return write_if_term(os, escape.c_str(),
+                             (std::streamsize)escape.length());
     });
 }
 
-const ManipulatorFunc color(const Color c, const bool is_background) {
+auto color(Color c, bool is_background) -> ManipulatorFunc {
     std::string escape;
     escape.reserve(5);
     escape += "\e[";
@@ -95,9 +92,9 @@ const ManipulatorFunc color(const Color c, const bool is_background) {
     });
 }
 
-const ManipulatorFunc color(const uint8_t c, const bool is_background) {
+auto color(uint8_t c, bool is_background) -> ManipulatorFunc {
     std::string escape;
-    // Pesimistic allocation
+    // Pessimistic allocation
     escape.reserve(11);
     escape += "\e[";
     escape += std::to_string(is_background ? 48 : 38);
@@ -106,14 +103,15 @@ const ManipulatorFunc color(const uint8_t c, const bool is_background) {
     escape += 'm';
 
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
-        return write_if_term(os, escape.c_str(), escape.length());
+        return write_if_term(os, escape.c_str(),
+                             (std::streamsize)escape.length());
     });
 }
 
-const ManipulatorFunc color(const uint8_t r, const uint8_t g, const uint8_t b,
-                            bool is_background) {
+auto color(uint8_t r, uint8_t g, uint8_t b, bool is_background)
+    -> ManipulatorFunc {
     std::string escape;
-    // Pesimistic allocation
+    // Pessimistic allocation
     escape.reserve(17);
     escape += "\e[";
     escape += std::to_string(is_background ? 48 : 38);
@@ -124,22 +122,23 @@ const ManipulatorFunc color(const uint8_t r, const uint8_t g, const uint8_t b,
     escape += 'm';
 
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
-        return write_if_term(os, escape.c_str(), escape.length());
+        return write_if_term(os, escape.c_str(),
+                             (std::streamsize)escape.length());
     });
 }
 
-const ManipulatorFunc move_cursor(const CursorDirection direction,
-                                  const uint8_t amount) {
+auto move_cursor(CursorDirection direction, uint8_t amount) -> ManipulatorFunc {
     std::string escape("\e[");
     escape += std::to_string(amount);
-    escape += direction;
+    escape += (char)direction;
 
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
-        return write_if_term(os, escape.c_str(), escape.length());
+        return write_if_term(os, escape.c_str(),
+                             (std::streamsize)escape.length());
     });
 }
 
-const ManipulatorFunc move_cursor(const uint8_t x, const uint8_t y) {
+auto move_cursor(uint8_t x, uint8_t y) -> ManipulatorFunc {
     std::string escape("\e[");
     escape += std::to_string(x);
     escape += ';';
@@ -147,17 +146,21 @@ const ManipulatorFunc move_cursor(const uint8_t x, const uint8_t y) {
     escape += 'H';
 
     return ManipulatorFunc([=](std::ostream &os) -> std::ostream & {
-        return write_if_term(os, escape.c_str(), escape.length());
+        return write_if_term(os, escape.c_str(),
+                             (std::streamsize)escape.length());
     });
 }
 
-std::ostream &move_cursor_home(std::ostream &os) { return os.write("\e[H", 3); }
+auto move_cursor_home(std::ostream &os) -> std::ostream & {
+    return os.write("\e[H", 3);
+}
 
 } // namespace manip
 } // namespace ansi
 
-std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc &&mf) {
+auto operator<<(std::ostream &os, const ansi::ManipulatorFunc &&mf)
+    -> std::ostream & {
     return mf(os);
 }
 
-#undef __ANSI_IMPL
+#undef ANSI_IMPL

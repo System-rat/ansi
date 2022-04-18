@@ -26,7 +26,7 @@
 
 /**
  * @brief The root namespace of the ANSI manipulators library
- * @details Contains various unility structures for ANSI related text outputing
+ * @details Contains various utility structures for ANSI related text outputing
  */
 namespace ansi {
 
@@ -37,7 +37,7 @@ namespace ansi {
  * With std::ostream
  */
 class ManipulatorFunc {
-    typedef std::function<std::ostream &(std::ostream &)> fn;
+    using fn = std::function<std::ostream &(std::ostream &)>;
 
     fn func;
 
@@ -46,7 +46,7 @@ class ManipulatorFunc {
      * @brief Construct a new ManipulatorFunc from a manipulator compatible
      * lambda
      *
-     * @param function The manipulator lambda with the signiture of
+     * @param function The manipulator lambda with the signature of
      * std::ostream&(std::ostream&)
      */
     explicit ManipulatorFunc(fn &&function) { func = function; }
@@ -57,7 +57,9 @@ class ManipulatorFunc {
      * @param os The stream to manipulate
      * @return The manipulated stream
      */
-    inline std::ostream &operator()(std::ostream &os) const { return func(os); }
+    inline auto operator()(std::ostream &os) const -> std::ostream & {
+        return func(os);
+    }
 };
 
 /**
@@ -104,11 +106,11 @@ enum TextModifier {
 struct StyleColor {
     /**
      * @brief The format type of the color
-     * @details Term256 is for chosing one of the 256 builtin colors, RGB is for
-     * chosing the Red, Green, and Blue channels individually (on supported
+     * @details Term256 is for choosing one of the 256 builtin colors, RGB is
+     * for choosing the Red, Green, and Blue channels individually (on supported
      * terminals), and ANSI is for the 8 ANSI colors
      */
-    enum ColorType { Term256, RGB, ANSI } type;
+    enum ColorType { Term256, RGB, ANSI } type{ANSI};
 
     /**
      * @brief Holds the color value depending on the color type
@@ -127,7 +129,7 @@ struct StyleColor {
      * the color type of ANSI
      * @param c The ANSI color to use
      */
-    StyleColor(Color c) : type(ANSI), ansiColor(c){};
+    StyleColor(Color c) : ansiColor(c){};
     /**
      * @brief Constructs a new StyleColor using a color number and sets the
      * color type to Term256
@@ -149,7 +151,7 @@ struct StyleColor {
     /**
      * @brief Default constructor
      */
-    StyleColor() : type(ANSI), ansiColor(ansi::Default){};
+    StyleColor() : ansiColor(ansi::Default){};
 
     /**
      * @brief Copy constructor
@@ -181,7 +183,7 @@ struct StyleColor {
      *
      * @param other The StyleColor object to move from
      */
-    StyleColor(StyleColor &&other) {
+    StyleColor(StyleColor &&other) noexcept {
         type = other.type;
         switch (type) {
         case ANSI:
@@ -205,7 +207,7 @@ struct StyleColor {
      * @param rhs The StyleColor object to copy from
      * @return The assigned object
      */
-    StyleColor &operator=(const StyleColor &rhs) {
+    auto operator=(const StyleColor &rhs) -> StyleColor & {
         this->~StyleColor();
         new (this) StyleColor(rhs);
         return *this;
@@ -217,7 +219,7 @@ struct StyleColor {
      * @param rhs The StyleColor object to copy from
      * @return The assigned object
      */
-    StyleColor &operator=(StyleColor &&rhs) {
+    auto operator=(StyleColor &&rhs) noexcept -> StyleColor & {
         this->~StyleColor();
         new (this) StyleColor(std::move(rhs));
         return *this;
@@ -246,7 +248,7 @@ struct StyleColor {
  * @warning This should only be called once, if called more than once or from a
  * separate thread it's undefined behavior
  */
-void set_raw_tty(int fd);
+auto set_raw_tty(int fd) -> void;
 
 /**
  * @brief Reset the terminal to original functionality
@@ -255,6 +257,6 @@ void set_raw_tty(int fd);
  * @warning This should only be called once, if called more than once or from a
  * separate thread it's undefined behavior
  */
-void reset_tty(int fd);
+auto reset_tty(int fd) -> void;
 
 } // namespace ansi

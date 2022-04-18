@@ -55,7 +55,9 @@ TEST(Internals, LexerError) {
     Lexer l("#[##]");
     l.get_token();
     ASSERT_ANY_THROW(l.get_token());
+}
 
+TEST(Internals, LexerNoError) {
     Lexer valid("#[Bold, Green]Text and stuff #[1234, DoesNotExist]More stuff "
                 "#[]Reset");
 

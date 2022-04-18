@@ -30,27 +30,31 @@
 
 // LEXER
 
-Token Lexer::get_token() {
-    if (is_at_end())
+auto Lexer::get_token() -> Token {
+    if (is_at_end()) {
         return Token{LexToken::EOFToken, cursor};
+    }
+
     if (!is_in_context) {
         switch (*cursor) {
         case '#': {
-            if (*(cursor + 1) == '\0')
+            if (*(cursor + 1) == '\0') {
                 throw std::runtime_error("Unexpected end of input");
+            }
 
             if (*(cursor + 1) == '$') {
                 auto tok = Token{LexToken::Var, cursor, 2};
                 cursor += 2;
 
                 return tok;
-            } else if (*(cursor + 1) == '[') {
+            }
+
+            if (*(cursor + 1) == '[') {
                 is_in_context = true;
                 return lex_format();
-            } else {
-                return lex_text();
             }
-            break;
+
+            return lex_text();
         }
 
         default:
@@ -58,7 +62,7 @@ Token Lexer::get_token() {
             break;
         }
     } else {
-        while (isspace(*cursor)) {
+        while ((bool)isspace(*cursor)) {
             cursor++;
         }
 
@@ -66,18 +70,15 @@ Token Lexer::get_token() {
     }
 }
 
-Lexer::Lexer(const char *str) : input(str), cursor(str){};
+Lexer::Lexer(const char *text) : input(text), cursor(text), offset(0){};
 
-bool Lexer::is_at_end(int extraOffset) {
-    if (*(cursor + extraOffset) == '\0')
-        return true;
-
-    return false;
+auto Lexer::is_at_end(int extraOffset) -> bool {
+    return *(cursor + extraOffset) == '\0';
 }
 
-Token Lexer::lex_number() {
+auto Lexer::lex_number() -> Token {
     offset = 0;
-    while (isdigit(*(cursor + offset))) {
+    while ((bool)isdigit(*(cursor + offset))) {
         offset++;
     }
 
@@ -88,9 +89,9 @@ Token Lexer::lex_number() {
     return token;
 }
 
-Token Lexer::lex_ident() {
+auto Lexer::lex_ident() -> Token {
     offset = 0;
-    while (isalpha(*(cursor + offset))) {
+    while ((bool)isalpha(*(cursor + offset))) {
         offset++;
     }
 
@@ -101,7 +102,7 @@ Token Lexer::lex_ident() {
     return token;
 }
 
-Token Lexer::lex_format() {
+auto Lexer::lex_format() -> Token {
     offset = 0;
 
     if (is_at_end()) {
@@ -115,11 +116,10 @@ Token Lexer::lex_format() {
             cursor += 2;
 
             return token;
-        } else {
-            throw std::runtime_error(std::string("unexpected symbol: ") +
-                                     std::string(cursor));
         }
-        break;
+
+        throw std::runtime_error(std::string("unexpected symbol: ") +
+                                 std::string(cursor));
     }
     case ',': {
         auto token = Token{LexToken::Comma, cursor, 1};
@@ -145,26 +145,29 @@ Token Lexer::lex_format() {
     }
 
     default: {
-        if (isalpha(*cursor)) {
+        if ((bool)isalpha(*cursor)) {
             return lex_ident();
-        } else if (isdigit(*cursor)) {
+        }
+
+        if ((bool)isdigit(*cursor)) {
             return lex_number();
-        } else if (isspace(*cursor)) {
-            while (isspace(*cursor)) {
+        }
+
+        if ((bool)isspace(*cursor)) {
+            while ((bool)isspace(*cursor)) {
                 cursor++;
             }
 
             return lex_format();
-        } else {
-            throw std::runtime_error(std::string("unexpected symbol: ") +
-                                     std::string(cursor));
         }
-        break;
+
+        throw std::runtime_error(std::string("unexpected symbol: ") +
+                                 std::string(cursor));
     }
     }
 }
 
-Token Lexer::lex_text() {
+auto Lexer::lex_text() -> Token {
     offset = 0;
     while (!is_at_end(offset)) {
         if (*(cursor + offset) == '#') {
@@ -195,24 +198,27 @@ HERESY:
     return token;
 }
 
-bool Lexer::is_escape() {
-    if (is_at_end(1))
+auto Lexer::is_escape() -> bool {
+    if (is_at_end(1)) {
         return false;
+    }
 
-    if (*(cursor + offset) != '#')
+    if (*(cursor + offset) != '#') {
         return false;
+    }
 
-    if (*(cursor + offset + 1) != '#')
+    if (*(cursor + offset + 1) != '#') {
         return false;
+    }
 
     return true;
 }
 
 // PARSER
 
-Parser::Parser(const char *str) {
+Parser::Parser(const char *text) {
     has_modifiers = false;
-    Lexer l = Lexer(str);
+    Lexer l = Lexer(text);
     std::vector<Token> tokens;
     Token token;
 
@@ -226,51 +232,69 @@ Parser::Parser(const char *str) {
     cursor = this->tokens.data();
 }
 
-std::tuple<ansi::TextModifier, bool> string_to_modifier(std::string str) {
-    if (str == "Bold")
+auto string_to_modifier(const std::string &str)
+    -> std::tuple<ansi::TextModifier, bool> {
+    if (str == "Bold") {
         return {ansi::Bold, true};
-    if (str == "Underline")
+    }
+    if (str == "Underline") {
         return {ansi::Underline, true};
-    if (str == "Italic")
+    }
+    if (str == "Italic") {
         return {ansi::Italic, true};
-    if (str == "Faint")
+    }
+    if (str == "Faint") {
         return {ansi::Faint, true};
-    if (str == "Blink")
+    }
+    if (str == "Blink") {
         return {ansi::Blink, true};
-    if (str == "Reverse")
+    }
+    if (str == "Reverse") {
         return {ansi::Reverse, true};
-    if (str == "Hidden")
+    }
+    if (str == "Hidden") {
         return {ansi::Hidden, true};
-    if (str == "Strikethrough")
+    }
+    if (str == "Strikethrough") {
         return {ansi::Strikethrough, true};
+    }
 
     return {ansi::Bold, false};
 }
 
-std::tuple<ansi::Color, bool> string_to_color(std::string str) {
-    if (str == "Black")
+auto string_to_color(const std::string &str) -> std::tuple<ansi::Color, bool> {
+    if (str == "Black") {
         return {ansi::Black, true};
-    if (str == "Red")
+    }
+    if (str == "Red") {
         return {ansi::Red, true};
-    if (str == "Green")
+    }
+    if (str == "Green") {
         return {ansi::Green, true};
-    if (str == "Yellow")
+    }
+    if (str == "Yellow") {
         return {ansi::Yellow, true};
-    if (str == "Blue")
+    }
+    if (str == "Blue") {
         return {ansi::Blue, true};
-    if (str == "Magenta")
+    }
+    if (str == "Magenta") {
         return {ansi::Magenta, true};
-    if (str == "Cyan")
+    }
+    if (str == "Cyan") {
         return {ansi::Cyan, true};
-    if (str == "White")
+    }
+    if (str == "White") {
         return {ansi::White, true};
-    if (str == "Default")
+    }
+    if (str == "Default") {
         return {ansi::Default, true};
+    }
 
     return {ansi::Default, false};
 }
 
-std::string Parser::get_format_string() {
+auto Parser::get_format_string() -> std::string {
     while (cursor->type != LexToken::EOFToken) {
         switch (cursor->type) {
         case LexToken::Text:
@@ -295,13 +319,14 @@ std::string Parser::get_format_string() {
 
     std::string built_string = builder.str();
     // Clean the escaped #
-    if (built_string.find("##") != std::string::npos)
+    if (built_string.find("##") != std::string::npos) {
         return std::regex_replace(built_string, std::regex("##"), "#");
+    }
 
     return built_string;
 }
 
-uint8_t get_num(std::string str) {
+auto get_num(const std::string &str) -> uint8_t {
     int num = std::stoi(str);
 
     if (num > std::numeric_limits<uint8_t>::max() ||
@@ -313,17 +338,19 @@ uint8_t get_num(std::string str) {
     return num;
 }
 
-void Parser::format() {
-    if (peek()->type == LexToken::EOFToken)
+auto Parser::format() -> void {
+    if (peek()->type == LexToken::EOFToken) {
         throw std::runtime_error("Unexpected end of string");
+    }
 
     has_modifiers = false;
     builder << ansi::manip::reset;
     advance();
 
     while (cursor->type != LexToken::End) {
-        if (has_modifiers)
+        if (has_modifiers) {
             consume(LexToken::Comma);
+        }
 
         if (cursor->type == LexToken::Ident) {
             auto mod =
@@ -363,15 +390,17 @@ void Parser::format() {
 
             consume(LexToken::Colon);
 
-            if (cursor->type != LexToken::Number)
+            if (cursor->type != LexToken::Number) {
                 throw std::runtime_error("Expected number");
+            }
             uint8_t num2 = get_num(std::string(cursor->start, cursor->length));
 
             advance();
             consume(LexToken::Colon);
 
-            if (cursor->type != LexToken::Number)
+            if (cursor->type != LexToken::Number) {
                 throw std::runtime_error("Expected number");
+            }
             uint8_t num3 = get_num(std::string(cursor->start, cursor->length));
 
             advance();
@@ -390,7 +419,7 @@ void Parser::format() {
     }
 }
 
-std::string token_to_string(LexToken token) {
+auto token_to_string(LexToken token) -> std::string {
     switch (token) {
     case LexToken::Start:
         return "#[";
@@ -415,21 +444,24 @@ std::string token_to_string(LexToken token) {
     }
 }
 
-void Parser::consume(LexToken type) {
-    if (cursor->type != type)
+auto Parser::consume(LexToken type) -> void {
+    if (cursor->type != type) {
         throw std::runtime_error("Expected symbol: " + token_to_string(type));
+    }
 
     advance();
 }
 
-Token *Parser::peek() {
-    if (cursor->type != LexToken::EOFToken)
+auto Parser::peek() -> Token * {
+    if (cursor->type != LexToken::EOFToken) {
         return cursor + 1;
+    }
 
     return cursor;
 }
 
-void Parser::advance() {
-    if (cursor->type != LexToken::EOFToken)
+auto Parser::advance() -> void {
+    if (cursor->type != LexToken::EOFToken) {
         cursor++;
+    }
 }

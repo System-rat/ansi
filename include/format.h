@@ -64,6 +64,6 @@ namespace ansi {
  * @throws std::runtime_exception The format string is invalid and cannot be
  * parsed
  */
-const char *format_str(const char *fstr);
+auto format_str(const char *fstr) -> const char *;
 
 } // namespace ansi

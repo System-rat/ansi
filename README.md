@@ -18,7 +18,7 @@ A small C++ library for adding ANSI modifiers to text
  - [Contributing](#contributing)
 
 # Requirements
-This libary is built using `C++11` so it should work with most projects.
+This library is built using `C++11` so it should work with most projects.
 It uses no special compiler extensions.
 
 # Building
@@ -32,7 +32,7 @@ target_link_libraries(<target> ansi)
 ```
 
 # Installing
-This library can also be installed globaly:
+This library can also be installed globally:
 
 Configure and run using `ninja` or another generator of your choice:
 ```sh

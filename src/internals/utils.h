@@ -26,7 +26,7 @@
 #include <unistd.h>
 #endif
 
-inline bool is_term() {
+inline auto is_term() -> bool {
 #ifdef _WIN32
     // Suck it windows
     return false;
@@ -34,11 +34,11 @@ inline bool is_term() {
     // Force the terminal output even if it's not a terminal
     return true;
 #else
-    return isatty(fileno(stdout));
+    return (bool)isatty(fileno(stdout));
 #endif
 }
 
-inline std::ostream &write_if_term(std::ostream &os, const char *str,
-                                   std::streamsize s) {
+inline auto write_if_term(std::ostream &os, const char *str, std::streamsize s)
+    -> std::ostream & {
     return is_term() ? os.write(str, s) : os;
 }

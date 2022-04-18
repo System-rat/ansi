@@ -69,7 +69,7 @@ class Style {
      * @return The manipulator to be used with operator<<
      * @note Resets all styling after the text is written to the ostream
      */
-    const ManipulatorFunc apply(const char *text) const;
+    auto apply(const char *text) const -> ManipulatorFunc;
 
     /**
      * @brief Default constructor
@@ -88,7 +88,7 @@ class Style {
      *
      * @param other The Style object to move from
      */
-    Style(Style &&other);
+    Style(Style &&other) noexcept;
 
     /**
      * @brief Trivial copy assignment operator
@@ -96,7 +96,7 @@ class Style {
      * @param other The Style object to copy from
      * @return The assigned object
      */
-    Style &operator=(const Style &other);
+    auto operator=(const Style &other) -> Style &;
 
     /**
      * @brief Trivial move assignment operator
@@ -104,7 +104,7 @@ class Style {
      * @param other The Style object to move from
      * @return The assigned object
      */
-    Style &operator=(Style &&other);
+    auto operator=(Style &&other) noexcept -> Style &;
 
   private:
     /**

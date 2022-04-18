@@ -27,7 +27,7 @@
 #include <string>
 
 #ifndef NODOC
-#define __ANSI_MANIPULATOR(name) std::ostream &name(std::ostream &);
+#define ANSI_MANIPULATOR(name) std::ostream &name(std::ostream &);
 #endif
 
 namespace ansi {
@@ -69,44 +69,48 @@ namespace manip {
 
 // Text effects
 
-__ANSI_MANIPULATOR(bold)
-__ANSI_MANIPULATOR(faint)
-__ANSI_MANIPULATOR(italic)
-__ANSI_MANIPULATOR(underline)
-__ANSI_MANIPULATOR(blink)
-__ANSI_MANIPULATOR(reverse)
-__ANSI_MANIPULATOR(hidden)
-__ANSI_MANIPULATOR(strikethrough)
+#ifndef NODOC
+
+ANSI_MANIPULATOR(bold)          // NOLINT
+ANSI_MANIPULATOR(faint)         // NOLINT
+ANSI_MANIPULATOR(italic)        // NOLINT
+ANSI_MANIPULATOR(underline)     // NOLINT
+ANSI_MANIPULATOR(blink)         // NOLINT
+ANSI_MANIPULATOR(reverse)       // NOLINT
+ANSI_MANIPULATOR(hidden)        // NOLINT
+ANSI_MANIPULATOR(strikethrough) // NOLINT
 
 // Global reset
 
-__ANSI_MANIPULATOR(reset)
+ANSI_MANIPULATOR(reset) // NOLINT
 
 // Single effect resets
 
-__ANSI_MANIPULATOR(nobold)
-__ANSI_MANIPULATOR(nofaint)
-__ANSI_MANIPULATOR(noitalic)
-__ANSI_MANIPULATOR(nounderline)
-__ANSI_MANIPULATOR(noblink)
-__ANSI_MANIPULATOR(noreverse)
-__ANSI_MANIPULATOR(nohidden)
-__ANSI_MANIPULATOR(nostrikethrough)
-__ANSI_MANIPULATOR(noreset)
+ANSI_MANIPULATOR(nobold)          // NOLINT
+ANSI_MANIPULATOR(nofaint)         // NOLINT
+ANSI_MANIPULATOR(noitalic)        // NOLINT
+ANSI_MANIPULATOR(nounderline)     // NOLINT
+ANSI_MANIPULATOR(noblink)         // NOLINT
+ANSI_MANIPULATOR(noreverse)       // NOLINT
+ANSI_MANIPULATOR(nohidden)        // NOLINT
+ANSI_MANIPULATOR(nostrikethrough) // NOLINT
+ANSI_MANIPULATOR(noreset)         // NOLINT
 
 // Erasing commands
 
-__ANSI_MANIPULATOR(erase_screen_to_end)
-__ANSI_MANIPULATOR(erase_screen_to_beginning)
-__ANSI_MANIPULATOR(erase_screen)
-__ANSI_MANIPULATOR(erase_line_to_end)
-__ANSI_MANIPULATOR(erase_line_to_beginning)
-__ANSI_MANIPULATOR(erase_line)
+ANSI_MANIPULATOR(erase_screen_to_end)       // NOLINT
+ANSI_MANIPULATOR(erase_screen_to_beginning) // NOLINT
+ANSI_MANIPULATOR(erase_screen)              // NOLINT
+ANSI_MANIPULATOR(erase_line_to_end)         // NOLINT
+ANSI_MANIPULATOR(erase_line_to_beginning)   // NOLINT
+ANSI_MANIPULATOR(erase_line)                // NOLINT
 
 // Cursor visibility
 
-__ANSI_MANIPULATOR(hide_cursor)
-__ANSI_MANIPULATOR(show_cursor)
+ANSI_MANIPULATOR(hide_cursor) // NOLINT
+ANSI_MANIPULATOR(show_cursor) // NOLINT
+
+#endif
 
 /**
  * @brief Creates a manipulator for the desired text styling
@@ -115,7 +119,7 @@ __ANSI_MANIPULATOR(show_cursor)
  * @param reset Should the styling be reset
  * @return The manipulator to be used with operator<<
  */
-const ManipulatorFunc modifier(const TextModifier mod, bool reset = false);
+auto modifier(TextModifier mod, bool reset = false) -> ManipulatorFunc;
 
 /**
  * @brief Creates a manipulator for the desired color
@@ -125,7 +129,7 @@ const ManipulatorFunc modifier(const TextModifier mod, bool reset = false);
  * the foreground. Defaults to foreground
  * @return The manipulator to be used with operator<<
  */
-const ManipulatorFunc color(const Color c, bool is_background = false);
+auto color(Color c, bool is_background = false) -> ManipulatorFunc;
 
 /**
  * @brief Creates a manipulator for the desired color
@@ -135,7 +139,7 @@ const ManipulatorFunc color(const Color c, bool is_background = false);
  * the foreground. Defaults to foreground
  * @return The manipulator to be used with operator<<
  */
-const ManipulatorFunc color(const uint8_t color, bool is_background = false);
+auto color(uint8_t color, bool is_background = false) -> ManipulatorFunc;
 
 /**
  * @brief Creates a manipulator for the desired color
@@ -147,8 +151,8 @@ const ManipulatorFunc color(const uint8_t color, bool is_background = false);
  * the foreground. Defaults to foreground
  * @return The manipulator to be used with operator<<
  */
-const ManipulatorFunc color(const uint8_t r, const uint8_t g, const uint8_t b,
-                            bool is_background = false);
+auto color(uint8_t r, uint8_t g, uint8_t b, bool is_background = false)
+    -> ManipulatorFunc;
 
 /**
  * @brief Creates a manipulator to move the cursor
@@ -157,8 +161,7 @@ const ManipulatorFunc color(const uint8_t r, const uint8_t g, const uint8_t b,
  * @param amount The amount to move in that direction
  * @return The manipulator to be used with operator<<
  */
-const ManipulatorFunc move_cursor(const CursorDirection direction,
-                                  const uint8_t amount);
+auto move_cursor(CursorDirection direction, uint8_t amount) -> ManipulatorFunc;
 
 /**
  * @brief Creates a manipulator to move the cursor to the desired coordinates
@@ -167,7 +170,7 @@ const ManipulatorFunc move_cursor(const CursorDirection direction,
  * @param y Y coord of the movement
  * @return The manipulator to be used with operator<<
  */
-const ManipulatorFunc move_cursor(const uint8_t x, const uint8_t y);
+auto move_cursor(uint8_t x, uint8_t y) -> ManipulatorFunc;
 
 /**
  * @brief Moves the cursor to home (0, 0)
@@ -175,7 +178,7 @@ const ManipulatorFunc move_cursor(const uint8_t x, const uint8_t y);
  * @param os The stream to manipulate
  * @return The manipulated stream
  */
-std::ostream &move_cursor_home(std::ostream &os);
+auto move_cursor_home(std::ostream &os) -> std::ostream &;
 
 } // namespace manip
 } // namespace ansi
@@ -188,7 +191,8 @@ std::ostream &move_cursor_home(std::ostream &os);
  * @param mf The manipulator
  * @return The manipulated stream
  */
-std::ostream &operator<<(std::ostream &os, const ansi::ManipulatorFunc &&mf);
+auto operator<<(std::ostream &os, const ansi::ManipulatorFunc &&mf)
+    -> std::ostream &;
 
 // Clean up utilities
-#undef __ANSI_MANIPULATOR
+#undef ANSI_MANIPULATOR

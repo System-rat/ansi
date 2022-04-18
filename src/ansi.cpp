@@ -25,15 +25,17 @@
 // Once again, suck it windows
 #include "termios.h"
 #include "unistd.h"
+#include <array>
 
 namespace ansi {
 
 // Yeah, yeah, globals, who gives a fuck
-termios original[3];
+std::array<termios, 3> original;
 
-void set_raw_tty(int fd) {
-    if (!isatty(fd))
+auto set_raw_tty(int fd) -> void {
+    if (!(bool)isatty(fd)) {
         return;
+    }
 
     termios t;
     tcgetattr(fd, &t);
@@ -51,9 +53,10 @@ void set_raw_tty(int fd) {
     tcsetattr(fd, TCSAFLUSH, &t);
 }
 
-void reset_tty(int fd) {
-    if (!isatty(fd))
+auto reset_tty(int fd) -> void {
+    if (!(bool)isatty(fd)) {
         return;
+    }
 
     tcsetattr(fd, TCSAFLUSH, &original[fd]);
 }

@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Careful, ye who tread down these cursed lands of newby parser
+// Careful, ye who tread down these cursed lands of newbie parser
 // implementations, for you might find unoptimized horrors beyond comprehension
 
 #pragma once
@@ -47,14 +47,14 @@ struct Token {
     const char *start;
     int length;
 
-    std::string to_string() const { return std::string(start, length); }
+    auto to_string() const -> std::string { return std::string(start, length); }
 };
 
 class Lexer {
   public:
-    explicit Lexer(const char *inputText);
+    explicit Lexer(const char *text);
 
-    Token get_token();
+    auto get_token() -> Token;
 
   private:
     bool is_in_context = false;
@@ -65,26 +65,26 @@ class Lexer {
 
     int offset;
 
-    bool is_at_end(int extraOffset = 0);
+    auto is_at_end(int extraOffset = 0) -> bool;
 
-    Token lex_text();
+    auto lex_text() -> Token;
 
-    Token lex_format();
+    auto lex_format() -> Token;
 
-    Token lex_ident();
+    auto lex_ident() -> Token;
 
-    Token lex_number();
+    auto lex_number() -> Token;
 
-    void advance();
+    auto advance() -> void;
 
-    bool is_escape();
+    auto is_escape() -> bool;
 };
 
 class Parser {
   public:
     explicit Parser(const char *text);
 
-    std::string get_format_string();
+    auto get_format_string() -> std::string;
 
   private:
     std::vector<Token> tokens;
@@ -95,11 +95,11 @@ class Parser {
 
     bool has_modifiers;
 
-    void advance();
+    auto advance() -> void;
 
-    Token *peek();
+    auto peek() -> Token *;
 
-    void consume(LexToken type);
+    auto consume(LexToken type) -> void;
 
-    void format();
+    auto format() -> void;
 };
