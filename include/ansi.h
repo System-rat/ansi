@@ -241,6 +241,7 @@ struct StyleColor {
     }
 };
 
+#ifndef _WIN32
 /**
  * @brief Sets the terminal to RAW output
  *
@@ -258,5 +259,16 @@ auto set_raw_tty(int fd) -> void;
  * separate thread it's undefined behavior
  */
 auto reset_tty(int fd) -> void;
+
+#else
+
+/**
+ * @brief Enable ANSI escapes on windows
+ *
+ * @return int The error code if the function failed, 0 if successful
+ */
+auto enable_ansi_windows() -> int;
+
+#endif
 
 } // namespace ansi

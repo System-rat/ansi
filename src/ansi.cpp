@@ -22,12 +22,16 @@
 
 #include "ansi.h"
 #ifndef _WIN32
-// Once again, suck it windows
 #include "termios.h"
 #include "unistd.h"
 #include <array>
+#else
+#include <windows.h>
+#endif
 
 namespace ansi {
+
+#ifndef _WIN32
 
 // Yeah, yeah, globals, who gives a fuck
 std::array<termios, 3> original;
@@ -60,6 +64,28 @@ auto reset_tty(int fd) -> void {
 
     tcsetattr(fd, TCSAFLUSH, &original[fd]);
 }
-} // namespace ansi
+
+#else
+
+auto enable_ansi_windows() -> int {
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut == INVALID_HANDLE_VALUE) {
+        return GetLastError();
+    }
+
+    DWORD dwMode = 0;
+    if (!GetConsoleMode(hOut, &dwMode)) {
+        return GetLastError();
+    }
+
+    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    if (!SetConsoleMode(hOut, dwMode)) {
+        return GetLastError();
+    }
+
+    return 0;
+}
 
 #endif
+
+} // namespace ansi

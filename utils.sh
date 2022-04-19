@@ -23,7 +23,7 @@ case $1 in
                 debug)
                     FLAGS+=("-DCMAKE_BUILD_TYPE=Debug");;
                 release)
-                    FLAGS+=("-DCMAKE_BUILD_TYPE=Debug");;
+                    FLAGS+=("-DCMAKE_BUILD_TYPE=Release");;
                 *)
                     error "unkown build type:" $2;
                     exit 1;

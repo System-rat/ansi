@@ -25,11 +25,14 @@
 #ifndef _WIN32
 #include <unistd.h>
 #endif
+#ifdef _WIN32
+#include <io.h>
+#include <stdio.h>
+#endif
 
 inline auto is_term() -> bool {
 #ifdef _WIN32
-    // Suck it windows
-    return false;
+    return (bool)_isatty(_fileno(stdout));
 #elif FORCE_TERM
     // Force the terminal output even if it's not a terminal
     return true;
